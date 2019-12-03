@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="head-end">
+        <style type="text/css">
+            .ui-grid-row .ui-grid-col-2,
+            .ui-grid-row .ui-grid-col-10 {
+                padding: 0.5em 0;
+                margin-left: 10px;
+            }
+
+            .ui-orderlist .ui-orderlist-list {
+                height: auto;
+            }
+
+            .ui-orderlist .ui-grid-row .ui-grid-col-2,
+            .ui-orderlist .ui-grid-row .ui-grid-col-10 {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="title">
+        Pesquisa User
+    </ui:define>
+
+    <ui:define name="description">
+        Pesquise de acordo com os filtros 
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Pesquisa User"/>
+
+			<h:form>
+            	<div class="box box-primary">
+                	<div class="box-header with-border">
+                    	<p:commandButton action="cadastro-user?faces-redirect=true" ajax="false" icon="fa fa-plus"
+                         	            value="Novo" styleClass="btn-primary"/>
+                    	<p:spacer width="5"/>
+	                    <p:commandButton value="Excluir Selecionado(s)" icon="fa fa-trash" styleClass="btn-danger"
+	                    			     action="#{listaUserMB.excluirSelecionados()}"
+	                                     process="@form" update="@form"/>
+	                    <p:spacer width="5"/>
+	                    <p:commandButton value="Olhar Selecionado(s)" 
+	                    				 oncomplete="PF('userSelecionadas').show()"
+	                    				 update="@(.ui-dialog)" 
+	                    				 styleClass="btn-info"
+	                                     icon="fa fa-search"/>
+	                    <p:separator/>
+	                    
+	                    
+	                    <p:dataTable id="userTable" widgetVar="userTable" rows="10"
+	                    			 value="#{listaUserMB.users}" var="user" rowKey="#{user.id}"
+	                    			 selection="#{listaUserMB.userSelecionadas}"	                    			 
+	                                 paginator="true" 	                                 
+	                                 paginatorPosition="bottom"	                                 
+	                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+	                                 currentPageReportTemplate=""
+	                                 rowsPerPageTemplate="5,10,15,20,30">
+	
+	
+	
+	                        <p:column selectionMode="multiple" width="5%" styleClass="align-center"/>
+	                        
+	                        <p:column headerText="Username"
+	                        		  filterBy="#{user.username}"
+	                        		  sortBy="#{user.username}" filterMatchMode="contains">
+	                        	<h:link value="#{user.username}" outcome="cadastro-user.xhtml">
+	                        		<f:param name="id" value="#{user.id}"/>	                        	
+	                        	</h:link>	                        
+	                        </p:column>	 
+	                        
+	                        <p:column headerText="Password"
+	                        	      filterBy="#{user.password}"
+	                        		  sortBy="#{user.password}" filterMatchMode="contains">
+	                        	<h:outputLabel value="#{user.password}" />
+	                        </p:column>
+	                        
+	                        <p:column headerText="Role"
+	                        	      filterBy="#{user.roli.nome}"
+	                        		  sortBy="#{user.roli.nome}" filterMatchMode="contains">
+	                        	<h:outputLabel value="#{user.roli.nome}" />
+	                        </p:column>	                                               
+	                        
+	                        	
+	                    </p:dataTable>
+					</div>
+	            </div>
+        	</h:form>
+        	
+        	<p:dialog header="Usuarios Selecionados" widgetVar="userSelecionadas" height="250"
+                  	  width="400" responsive="true" styleClass="box-success">
+	            <p:dataList id="listaUserSelecionadas" value="#{listaUserMB.userSelecionadas}" var="user"
+	                        type="definition">
+	                        
+	                        ID: #{user.id} - Username: #{user.username} - Password: #{user.password} - Role: #{user.roli.nome}
+
+	            </p:dataList>
+			</p:dialog>
+
+        
+    </ui:define>
+
+</ui:composition>

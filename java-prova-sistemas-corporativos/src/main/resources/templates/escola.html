@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'escola')}">
+
+<body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Escolas </strong>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-sm table-striped table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Endereco</th>
+							<th>Telefone</th>
+							<th>Email</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="escola : ${escolas}">
+							<td th:text="${escola.id}"></td>
+							<td th:text="${escola.nome}"></td>
+							<td th:text="${escola.endereco}"></td>
+							<td th:text="${escola.telefone}"></td>
+							<td th:text="${escola.email}"></td>
+							<td>
+								<div class="btn-group pull-right">
+							   		<a class="btn btn-sm btn-primary" th:href="@{/editEscola/{id}(id=${escola.id})}" >Editar</a>
+							   		<a class="delete btn btn-sm btn-danger" th:href="@{/deleteEscola/{id}(id=${escola.id})}">Excluir</a>
+							   </div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<a class="btn btn-sm btn-success" th:href="@{/addEscola/}" >Adicionar</a>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:adm="http://github.com/adminfaces"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="title">
+        Cadastro Questão
+    </ui:define>
+
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="id" value="#{cadastroQuestaoMB.idQuestao}" converter="javax.faces.Long" />
+			<f:event listener="#{cadastroQuestaoMB.inicializar()}" type="preRenderView"></f:event>
+		</f:metadata>
+
+		<adm:breadcrumb
+			title="Cadastro Questao #{cadastroQuestaoMB.questao.id}"
+			link="cadastro-questao.xhtml?id=#{cadastroQuestaoMB.questao.id}" />
+		<h:form id="form" prependId="false">
+			<p:focus />
+
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<div id="main-buttons" class="hidden-sm hidden-xs">
+					
+						<p:commandButton value="Salvar" update="@form"
+							action="#{cadastroQuestaoMB.salvar()}" icon="fa fa-check"
+							styleClass="btn-primary" />
+						<p:spacer width="5" />
+
+						<p:commandButton value="Excluir" process="@this"
+							rendered="#{cadastroQuestaoMB.questao.edicao}"
+							action="#{cadastroQuestaoMB.excluir()}" icon="fa fa-trash"
+							styleClass="btn-danger">
+						</p:commandButton>
+						<p:spacer width="5" />
+						<p:commandButton value="Voltar" immediate="true"
+							action="lista-questao?faces-redirect=true" process="@this"
+							icon="fa fa-close" />
+
+					</div>
+
+					<p:splitButton value="Salvar" update="@form" icon="fa fa-check"
+						action="#{cadastroQuestaoMB.salvar()}"
+						styleClass="hidden-md hidden-lg btn-primary">
+						<p:menuitem value="Excluir"
+							rendered="#{cadastroQuestaoMB.questao.edicao}"
+							action="#{cadastroQuestaoMB.excluir()}" process="@this"
+							icon="fa fa-trash" />
+						<p:separator />
+						<p:menuitem value="Voltar"
+							action="lista-questao?faces-redirect=true" process="@this"
+							icon="fa fa-close" />
+					</p:splitButton>
+
+
+
+					<p:separator />
+
+					<div class="ui-fluid">
+					
+						<p:panelGrid id="capaPanel" columns="2" layout="grid">
+
+							
+							 <p:outputLabel 	value="Upload imagem" for="fileupload" />  
+							<p:fileUpload 	id="fileupload" 
+											value="#{cadastroQuestaoMB.arquivo}" 
+											mode="simple" 
+											allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+											sizeLimit="100000" />
+						 
+					
+							 
+							
+							<p:outputLabel value="Categoria:" for="categ" />
+							<p:selectOneMenu   id="categ" required="true" value="#{cadastroQuestaoMB.questao.categoria}"  
+											   requiredMessage="*required" >
+								<f:selectItem  itemLabel="Selecione " itemValue="" />
+								<f:selectItems value="#{cadastroQuestaoMB.categorias}" 
+												var="c" 
+												itemLabel="#{c.id}" 
+												itemValue="#{c.id}" />
+							</p:selectOneMenu>  
+							
+							 
+							
+							
+							 
+							<p:outputLabel value="Descrição:" for="quest" />
+							<p:inputTextarea id="quest" value="#{cadastroQuestaoMB.questao.nome}"/>
+							 
+							<p:outputLabel value="Verdadeira" for="resposta" />
+							
+							<p:inputText id="resposta" required="true"
+										 value="#{cadastroQuestaoMB.questao.resposta.verdadeira1}"
+										 requiredMessage="*required" />
+							 
+
+							<p:outputLabel value="Falsa:" for="resposta1" />
+							<p:inputText id="resposta1" required="true"
+								value="#{cadastroQuestaoMB.questao.resposta.falsa1}"
+								requiredMessage="*required" />
+							 
+
+							<p:outputLabel value="Falsa:" for="resposta2" />
+							<p:inputText id="resposta2" required="true"
+								value="#{cadastroQuestaoMB.questao.resposta.falsa2}"
+								requiredMessage="*required" />
+						 
+
+							<p:outputLabel value="Falsa:" for="resposta3" />
+							<p:inputText id="resposta3" required="true"
+								value="#{cadastroQuestaoMB.questao.resposta.falsa3}"
+								requiredMessage="*required" />
+							 
+
+						</p:panelGrid>
+
+
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

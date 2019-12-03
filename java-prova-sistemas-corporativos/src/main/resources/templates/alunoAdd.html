@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'aluno')}">
+
+<body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Cadastro de Alunos</strong>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" th:object="${aluno}" th:action="@{/saveAluno}" method="POST" style="margin: 10px">
+				<div class="form-group">
+					<fieldset>
+						<div class="form-group row">
+							<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+								<div th:each="detailedError : ${#fields.detailedErrors()}">
+									<span th:text="${detailedError.message}"></span>
+								</div>
+							</div>
+							
+							
+						</div>
+						<div class="form-group row">
+							<div class="col-md-1">
+							     <label for="id" class="control-label">ID</label> 
+								<input type="text" class="form-control input-sm" id="id"
+									th:field="*{id}" readOnly="readonly" />
+							</div>
+							<div class="col-md-7">
+							    <label for="escola" class="control-label">Escola</label>
+								<select id="escola" class="form-control" th:field="*{escola}">
+									<option value="">Selecione a Escola</option>
+									<option th:each="esc : ${escolas}" th:value="${esc.id}" th:text="${esc.nome}">IFRN Parnamirim</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-4"
+								th:classappend="${#fields.hasErrors('matricula')}? 'has-error'">
+								<label>Matricula</label> <input type="number"
+									class="form-control input-sm" th:field="*{matricula}"
+									autofocus="autofocus" placeholder="Informe a matricula"
+									maxlength="10" />
+							</div>
+							<div class="col-md-4"
+								th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+								<label>Nome</label> <input type="text"
+									class="form-control input-sm" th:field="*{nome}"
+									maxlength="100" placeholder="Informe o nome" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="col-md-4"
+								th:classappend="${#fields.hasErrors('dataNascimento')}? 'has-error'">
+								<label>Data Nascimento</label> <input type="date"
+									class="form-control input-sm" th:field="*{dataNascimento}" />
+							</div>
+							<div class="col-md-4"
+								th:classappend="${#fields.hasErrors('endereco')}? 'has-error'">
+								<label>Endereco</label> <input type="text"
+									class="form-control input-sm" th:field="*{endereco}" />
+							</div>
+							
+						</div>
+						
+						
+						<div class="form-group row">
+							<div class="col-md-4"
+								th:classappend="${#fields.hasErrors('rg')}? 'has-error'">
+								<label>RG</label> <input type="text"
+									class="form-control input-sm" th:field="*{rg}"
+									maxlength="150" placeholder="Informe o RG" />
+							</div>
+							<div class="col-md-4"
+								th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
+								<label>CPF</label> <input type="text"
+									class="form-control input-sm" th:field="*{cpf}"
+									maxlength="15" placeholder="Informe o cpf" />
+							</div>
+							
+						</div>
+						
+						 
+						<div class="form-group row">
+							<div class="col-md-4"
+								th:classappend="${#fields.hasErrors('telefone')}? 'has-error'">
+								<label>Telefone</label> <input type="text"
+									class="form-control input-sm" th:field="*{telefone}"
+									maxlength="15" placeholder="Informe o telefone" />
+							</div>
+							<div class="col-md-4"
+								th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+								<label>Email</label> <input type="text"
+									class="form-control input-sm" th:field="*{email}"
+									maxlength="100" placeholder="Informe o email" />
+							</div>
+							
+						</div>
+					</fieldset>
+				</div>
+				<div class="form-group row">
+					<button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+					<a th:href="@{/aluno}" class="btn btn-sm btn-default">Cancelar</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

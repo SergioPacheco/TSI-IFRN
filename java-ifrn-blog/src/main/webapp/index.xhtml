@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>BLOG IFRN</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
+        <style>
+            body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+        </style>
+    </h:head>
+
+    <h:body class="w3-light-grey">
+        <div class="w3-content" style="max-width:1400px">
+
+            <header class="w3-container w3-center w3-padding-32"> 
+                <h1><b>BLOG IFRN</b></h1>
+                <p>Tecnologia em Sistemas para Internet <span class="w3-tag">IFRN</span></p>
+            </header>
+
+            <div class="w3-row">
+                <div class="w3-col l8 s12" style="line-height: 24px;">
+                    <ui:repeat value="#{postController.allPosts}" var="p">
+                        <div class="w3-card-4 w3-margin w3-white">
+                             
+                            <div class="w3-container">
+                                <h3><b><h:outputText value="#{p.title}" /></b></h3>
+                                <h5><span class="w3-opacity">by Ifrn</span></h5>
+                            </div>
+
+                            <div class="w3-container">
+                                <p>#{p.text.substring(0, 400)}<br/></p>
+                                <div class="w3-row">
+                                    <div class="w3-col m8 s12">
+                                        <p><h:link class="w3-button w3-padding-large w3-white w3-border"
+                                                   outcome="post?title=#{p.title}">
+                                                <b>LEIA MAIS »</b>
+                                            </h:link></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                    </ui:repeat>
+                </div>
+
+                <div class="w3-col l4">
+                    <div class="w3-card-2 w3-margin w3-margin-top">
+                        <h:form>
+                            <h:inputText style="width: 80%; height: 30px; padding-left: 10px;"
+                                         p:placeholder="Digite" binding="#{inputKey}"/>
+                            <h:commandButton style="width: 20%; height: 30px;" 
+                                             action="#{post?title=#{p.title}" value="Search" />
+                        </h:form><br/>
+                         
+                        <div class="w3-container w3-white">
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                     
+                    <hr />
+
+                    <div class="w3-card-2 w3-margin">
+                        <div class="w3-container w3-padding">
+                            <h4>Categorias</h4>
+                        </div>
+                        <div class="w3-container w3-white">
+                            <p>
+                                <ui:repeat value="#{categoryController.categories}" var="tag">
+                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">
+                                        #{category.name}
+                                    </span> 
+                                </ui:repeat>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+
+        <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+            <p>Tecnologia em Sistemas para Internet  <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">IFRN</a></p>
+        </footer>
+
+    </h:body>
+
+</html>

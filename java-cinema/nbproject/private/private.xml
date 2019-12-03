@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/Cinema/web/listaFilmes.jsp</file>
+            <file>file:/E:/Cinema/web/controleMostra.jsp</file>
+            <file>file:/E:/Cinema/src/java/ifrn/modelo/Horarios.java</file>
+            <file>file:/E:/Cinema/web/controleFilmes.jsp</file>
+            <file>file:/E:/Cinema/web/novoFilmes.jsp</file>
+            <file>file:/E:/Cinema/src/java/ifrn/persistencia/FilmesDAO.java</file>
+            <file>file:/E:/Cinema/src/java/ifrn/persistencia/HorariosFilmesDAO.java</file>
+            <file>file:/E:/Cinema/web/controleApaga.jsp</file>
+            <file>file:/E:/Cinema/src/java/ifrn/modelo/HorariosFilmes.java</file>
+            <file>file:/E:/Cinema/web/processaEdita.jsp</file>
+            <file>file:/E:/Cinema/src/java/ifrn/persistencia/Conexao.java</file>
+            <file>file:/E:/Cinema/web/editaFilmes.jsp</file>
+            <file>file:/E:/Cinema/src/java/ifrn/persistencia/HorariosDAO.java</file>
+            <file>file:/E:/Cinema/web/mostraFilmes.jsp</file>
+        </group>
+    </open-files>
+</project-private>

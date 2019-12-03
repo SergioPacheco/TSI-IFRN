@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+
+  <body>
+
+    <h2>Prova (II Unidade) </h2>
+    <div class="row">
+        <div class="col-md-12">
+         <img class="img-responsive" src="../static/resources/images/diagrama.png" th:src="@{/resources/images/diagrama.png}"/> 
+         <p>Seu José, dono de uma rede de escolas em Parnamirim/RN, quer contratar um programador, mas antes, deseja
+			realizar um teste junto com uma entrevista, aquele com melhor desempenho na prova e na entrevista será
+			contratado. Essa demanda surgiu depois que ele entendeu que é o momento de substituir o programa atual por um
+			programa mais completo e que possa ser acessado a partir de qualquer lugar.  
+			<p>É ai que entra o conceito de nuvem, no qual seu José ficou apaixonado, ele ouviu falar também da linguagem Java, que era excelente para sistemas
+			corporativos, e do projeto Spring Boot que é sensacional, segundo especialistas. Diante do exposto, seu José pensou
+			no seguinte teste: A criação de uma aplicação Spring Boot com camada de visão em Thymeleaf e persistência com
+			MySQL. A aplicação deve atender os seguintes requisitos: CRUDs de Escola e Aluno, Log de atividades em banco,
+			validação de alguns campos e uma API REST para consultar alunos por escola. </p>
+        </div>
+    </div>
+
+  </body>
+
+</html>

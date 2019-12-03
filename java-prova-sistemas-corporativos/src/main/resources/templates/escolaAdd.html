@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'escola')}">
+
+<body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Cadastro de Escolas</strong>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" th:object="${escola}" th:action="@{/saveEscola}" method="POST" style="margin: 10px">
+				<div class="form-group">
+					<fieldset>
+						<div class="form-group row">
+							<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+								<div th:each="detailedError : ${#fields.detailedErrors()}">
+									<span th:text="${detailedError.message}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+						
+							<div class="col-md-1">
+							    <label>ID</label> <input type="text" class="form-control input-sm" id="id"
+									th:field="*{id}" readOnly="readonly" />
+							</div>
+							
+							<div class="col-md-8"
+								th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+								<label>Nome</label> <input type="text"
+									class="form-control input-sm" th:field="*{nome}"
+									autofocus="autofocus" placeholder="Informe o nome"
+									maxlength="50" />
+							</div>
+							
+						</div>
+						<div class="form-group row">
+							
+							<div class="col-md-3"
+								th:classappend="${#fields.hasErrors('endereco')}? 'has-error'">
+								<label>Endereco</label> <input type="text"
+									class="form-control input-sm" th:field="*{endereco}"
+									maxlength="150" placeholder="Informe o endereco" />
+							</div>
+							
+						 
+							<div class="col-md-3"
+								th:classappend="${#fields.hasErrors('telefone')}? 'has-error'">
+								<label>Telefone</label> <input type="text"
+									class="form-control input-sm" th:field="*{telefone}"
+									maxlength="150" placeholder="Informe o telefone" />
+							</div>
+							<div class="col-md-3"
+								th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+								<label>Email</label> <input type="text"
+									class="form-control input-sm" th:field="*{email}"
+									maxlength="150" placeholder="Informe o email" />
+							</div>
+						</div>
+						
+					</fieldset>
+				</div>
+				<div class="form-group row">
+					<button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+					<a th:href="@{/escola}" class="btn btn-sm btn-default">Cancelar</a>
+				</div>
+			</form>
+			<h2>Alunos </h2>
+  
+		    <table class="table table-sm table-striped table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Matricula</th>
+							<th>Nome</th>
+							<th>Dt.Nascimento</th>
+							<th>Email</th>
+							<th>Escola</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="aluno : ${listaAlunos}">
+							<td th:text="${aluno.id}"></td>
+							<td th:text="${aluno.matricula}"></td>
+							<td th:text="${aluno.nome}"></td>
+							<td th:text="${#dates.format(aluno.dataNascimento, 'dd/MM/yyyy')}"></td>
+							<td th:text="${aluno.email}"></td>
+							<td th:text="${aluno.escola != null} ? ${#strings.toUpperCase(aluno.escola.nome)} : 'A Escola é null'"></td>
+							<td>
+								<div class="btn-group pull-right">
+							   		<a class="btn btn-sm btn-primary" th:href="@{/editAluno/{id}(id=${aluno.id})}" >Editar</a>
+							   		<a class="delete btn btn-sm btn-danger" th:href="@{/deleteAluno/{id}(id=${aluno.id})}">Excluir</a>
+							   </div>
+							</td>
+							
+						</tr>
+					</tbody>
+				</table>
+			
+			
+		</div>
+	</div>
+</body>
+</html>

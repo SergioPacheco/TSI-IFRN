@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>BLOG IFRN</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Raleway" />
+	<style>
+body, h1, h2, h3, h4, h5 {
+	font-family: "Raleway", sans-serif
+}
+</style>
+</h:head>
+<h:body>
+	<div class="w3-col l8 s12"
+		style="position: absolute; left: 50%; transform: translate(-50%); line-height: 24px;">
+		<div class="w3-card-4 w3-margin w3-white">
+			 
+			<div class="w3-container">
+				<h3>
+					<b>#{postController.postByTitle.title}</b>
+				</h3>
+				<h5>
+					<span class="w3-opacity">Data: </span>
+				</h5>
+			</div>
+
+			<div class="w3-container">
+				<p>#{postController.postByTitle.text}</p>
+				<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<p>
+							<h:link class="w3-button w3-padding-large w3-white w3-border"
+								onclick="goBack()">
+								<b>VOLTA</b>
+							</h:link>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+</h:body>
+</html>

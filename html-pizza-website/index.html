@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <title>PIZZA POTIGUAR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/pizza.js" type="text/javascript" charset="utf-8"></script>
+    </head>	
+
+    <body>
+
+        <div class="top hide-small">
+            <ul class="navbar xlarge black opacity hover-opacity-off" id="myNavbar">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#menu">MENU</a></li>
+                <li><a href="#sobre">SOBRE</a></li>
+                <li><a href="#mapa">CONTATO</a></li>
+            </ul>
+        </div>
+
+
+        <header class="ct-image display-container grayscale-min" id="home"
+        		data-image1="img/pizza_1.jpg"
+				data-image2="img/pizza_2.jpg"
+				data-image3="img/pizza_3.jpg"
+				data-current="1"
+				data-amount="3">
+    
+            <div class="display-bottomleft padding">
+                <span class="tag xlarge">ABERTO das 10h as 24h</span>
+            </div>
+            <div class="display-middle center">
+                <span class="text-white hide-small text-100" ><br>PIZZA POTIGUAR</span>
+                <span class="text-white hide-large hide-medium text-60"><b>ótima<br>PIZZA</b></span>
+                <p><a href="#menu" class="btn xxlarge padding">Veja o menu</a></p>
+            </div>
+
+        </header>
+
+        <div class="container black padding-64 xxlarge" id="menu">
+            <div class="content">
+
+                <h1 class="center jumbo" >MENU</h1>
+                <div class="row center border border-dark-grey">
+                    <a href="javascript:void(0)" onclick="openMenu(event, 'Pizza');" id="myLink">
+                        <div class="col s4 tablink padding-large hover-red">Pizza</div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="openMenu(event, 'Saladas');">
+                        <div class="col s4 tablink padding-large hover-red">Saladas</div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="openMenu(event, 'Extras');">
+                        <div class="col s4 tablink padding-large hover-red">Extras</div>
+                    </a>
+                </div>
+
+                <div id="Pizza" class="container menu padding-32 white">
+                    <h1><b>Margherita</b> <span class="right tag dark-grey round">R$32,50</span></h1>
+                    <p class="text-grey">Molho de tomate, mozzarella, tomates, majericão e orégano.</p>
+                    <hr>
+
+                    <h1><b>Formaggio</b> <span class="right tag dark-grey round">R$35,50</span></h1>
+                    <p class="text-grey">Cinco Queijos (mozzarella, provolone, parmesão, gorgonzola, catupiry).</p>
+                    <hr>
+
+                    <h1><b>Frango</b> <span class="right tag dark-grey round">R$47,00</span></h1>
+                    <p class="text-grey">Tomates Frescos, mozzarella, frango desfiado, ervilha e orégano.</p>
+                    <hr>
+
+                    <h1><b>Camarão</b> <span class="right tag dark-grey round">R$36,50</span></h1>
+                    <p class="text-grey">Camarão gratinado com paermesão e cebola.</p>
+                    <hr>
+
+                    <h1><b>Escarola</b> <span class="tag red round">Hot!</span><span class="right tag dark-grey round">R$40,00</span></h1>
+                    <p class="text-grey">Alho e óleo, achovas e mozarela.</p>
+                    <hr>
+
+                    <h1><b>Caprese</b> <span class="tag grey round">Nova</span><span class="right tag dark-grey round">R$41,50</span></h1>
+                    <p class="text-grey">Tomate caqui, mozzarella de búfala e manjericão.</p>
+                </div>
+
+                <div id="Saladas" class="container menu padding-32 white">
+                    <h1><b>Mar del Plata</b> <span class="tag grey round">Popular</span> <span class="right tag dark-grey round">R$13,50</span></h1>
+                    <p class="text-grey">Carpaccio com salada.</p>
+                    <hr>
+
+                    <h1><b>Caesar</b> <span class="right tag dark-grey round">R$14,50</span></h1>
+                    <p class="text-grey">Alface, agrião, bacon, crouton e parmesão.</p>
+                    <hr>
+
+                    <h1><b>Rúcula</b> <span class="right tag dark-grey round">R$11,00</span></h1>
+                    <p class="text-grey">Nó de mozzarella de búfala, rúcula e tomate seco.</p>
+                    <hr>
+
+                    <h1><b>Verde</b> <span class="right tag dark-grey round">R$25,50</span></h1>
+                    <p class="text-grey">Alface, rúcula e agrião.</p>
+                </div>
+
+
+                <div id="Extras" class="container menu padding-32 white">
+                    <h1><b>Batata frita</b> <span class="tag grey round">Seasonal</span><span class="right tag dark-grey round">R$5,50</span></h1>
+
+                    <hr>
+
+                    <h1><b>Bruschetta</b> <span class="right tag dark-grey round">R$8,50</span></h1>
+                    <p class="text-grey">Pão com pesto, tomates, cebola e alho.</p>
+                    <hr>
+
+                    <h1><b>Pão de alho</b> <span class="right tag dark-grey round">R$9,50</span></h1>
+                    <p class="text-grey">Pão ciabatta grelhado, mantega com alho e cebola.</p>
+                    <hr>
+
+                    <h1><b>Tiramissú Tradicional</b> <span class="right tag dark-grey round">R$10,50</span></h1>
+                    <p class="text-grey">Preparada com creme mascarpone e calda de café.</p>
+                </div><br>
+
+            </div>
+        </div>
+
+        <div class="container padding-64 red grayscale xlarge" id="sobre">
+            <div class="content">
+                <h1 class="center jumbo">Sobre</h1>
+
+                <p>Investindo em um menu que une bases tradicionais a sugestões criativas, a Pizzaria Potiguar tem se estabelecido desde 2004 como uma boa opção fora do circuito tradicional de restaurantes no Rio Grande do Norte. As duas unidades da rede, em Parnamirim e Natal, são conhecidas por seu ambiente acolhedor e amplo, com decoração rústica-chique, marcadas por madeira e tijolos à vista. </p>
+
+                <p> Chama a atenção também a preocupação da casa em criar... sabores para todos os paladares e preferências, com detalhes como a possibilidade de se escolher entre a massa de farinha de trigo normal ou integral, assim como a possibilidade de escolher a espessura da pizza, entre outras coisas. </p>
+
+
+                <p><strong>Nosso pizzaiolo?</strong> Mr. Bruno<img src="img/pizzaiolo.jpg" class="circle right" alt="Chef"></p>
+                <p>Conheça nossa cozinha.</p>
+                <img src="img/rest.jpg" class="margin-top margin-bottom" alt="Restaurant">
+                <h1><b>Horários:</b></h1>
+
+                <div class="row">
+                    <div class="col s6">
+                        <p>Segundas & Terças FECHADO</p>
+                        <p>Quarta 10h- 24h</p>
+                        <p>Quinta Feira 10h - 24h</p>
+                    </div>
+                    <div class="col s6">
+                        <p>Sexta   10h - 12h</p>
+                        <p>Sábado  10h - 23h</p>
+                        <p>Domingo 10h - 10h</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- google maps -->
+        <div id="mapa" class="grayscale-max"></div>
+
+        <div class="container padding-64 blue-grey grayscale-min xlarge">
+            <div class="content">
+                <h1 class="center jumbo" >Contato</h1>
+                <p>Ligue (84)1234-1234</p>
+                <p>
+                    <span class="tag">Oba Festa!</span> 
+                    Oferecemos um excelente serviço de Buffet.
+                </p>
+                <p class="xxlarge"><strong>Reserve</strong> uma mesa, faça uma pedido especial ou somente mande uma mensagem:</p>
+                <form action="" target="_blank"  onsubmit="alert('A sua mensagem foi enviada com SUCESSO! - esperaramos sua visita.')";  >
+                    <p><input class="input padding-16 border" type="text" placeholder="Nome" required name="Nome"></p>
+                    <p><input class="input padding-16 border" type="number" placeholder="Quantas pessoas" required name="Pessoas"></p>
+                    <p><input class="input padding-16 border" type="datetime-local" placeholder="Data e Hora" required name="date" value="2017-11-16T20:00"></p>
+                    <p><input class="input padding-16 border" type="text" placeholder="Mensagem \ Pedido especial" required name="Mensagem"></p>
+                    <p><button class="btn-block padding" type="submit">ENVIAR MENSAGEM</button></p>
+                </form>
+            </div>
+        </div>
+
+        <footer class="center black padding-48 xxlarge">
+            <p>Powered by <a href="http://portal.ifrn.edu.br/ensino/cursos/cursos-de-graduacao/tecnologia/tecnologia-em-sistemas-para-internet" title="Pizza Potiguar" target="_blank" class="hover-text-green">IFRN</a></p>
+        </footer>
+
+        <!-- Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd5m2i6CBva71r38-ToCVE53CY2-PylJQ&callback=myMap"></script>
+
+    </body>
+</html>

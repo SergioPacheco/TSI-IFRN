@@ -1,0 +1,91 @@
+{
+	"casas" : [
+		{
+			"id":1,
+			"nome": "NATAL R$ 636.802,00",
+			"desc": "AVALIAÇÃO R$ 760.000.00 - ALECRIM Casa - Desconto 16% - RUA DOS PAIANASES,N. 1478, ALECRIM, NATAL 3 quarto(s) ",
+			"url_info": "http://www1.caixa.gov.br/Simov/busca-imovel.asp?sltTipoBusca=imoveis#",
+			"url_foto": "http://www1.caixa.gov.br/fotos/F000001000263621.jpg",
+			"url_video": "http://www1.caixa.gov.br/fotos/F000001000263621.jpg",
+			"latitude": "-23.564224",
+			"longitude":"-46.653156"
+		},
+		{
+			"id":2,
+			"nome": "NATAL R$ 696.00,00",
+			"desc": "AVALIAÇÃO R$ 870.000,00 - CAPIM MACIO - AV GUSTAVO GUEDES,N. 1916",
+			"url_info": "http://www1.caixa.gov.br/Simov/busca-imovel.asp?sltTipoBusca=imoveis#",
+			"url_foto": "http://www1.caixa.gov.br/fotos/F155553381551121.jpg",
+			"url_video": "http://www1.caixa.gov.br/fotos/F155553381551121.jpg",
+			"latitude": "-23.564224",
+			"longitude":"-46.653156"
+		},
+		{
+			"id":3,
+			"nome": "NATAL R$ 595.000,00",
+			"desc": "AVALIAÇÃO R$ 390.000,00 - Desconto (30%) - PITIMBU - R CARLOS JOSE DA SILVA,N. 30 Apto. CASA CASA 5, COND ALTO DO VALE, PITIMBU, NATAL 292,18 m2, 3 suíte(s), 2 vaga(s) na garagem",
+			"url_info": "http://www1.caixa.gov.br/Simov/busca-imovel.asp?sltTipoBusca=imoveis#",
+			"url_foto": "http://www1.caixa.gov.br/fotos/F000000001768221.jpg",
+			"url_video": "http://www1.caixa.gov.br/fotos/F000000001768221.jpg",
+			"latitude": "-23.564224",
+			"longitude":"-46.653156"
+		},
+		{
+			"id":4,
+			"nome": "NATAL R$ 292.500,00",
+			"desc": "AVALIAÇÃO R$ 390.000,00 - Desconto 25% - PONTA NEGRA Casa - Ocupado - Venda Direta - RUA PRAIA DE BARREIRA ROXA,N. 2153 LOTE 04 QD 01, PONTA NEGRA, NATAL 2 quarto(s), 2 suíte(s)",
+			"url_info": "http://www1.caixa.gov.br/Simov/busca-imovel.asp?sltTipoBusca=imoveis#",
+			"url_foto": "http://www1.caixa.gov.br/fotos/F000000001768221.jpg",
+			"url_video": "http://www1.caixa.gov.br/fotos/F000000001768221.jpg",
+			"latitude": "-23.564224",
+			"longitude":"-46.653156"
+		}
+
+	],
+	"apartamentos" : [
+		{
+			"id":11,
+			"nome": "NATAL R$ 82.838,240",
+			"desc": "AVALIAÇÃO R$ 135.000,00 - R ENG. JOAO HELIO ROCHA,N. 00820 Apto. 405 BLOCO 6, PLANALTO, NATAL ",
+			"url_info": "",
+			"url_foto": "http://www1.caixa.gov.br/fotos/F144440359363021.jpg",
+			"url_video": "http://www1.caixa.gov.br/fotos/F144440359363021.jpg",
+			"latitude": "-23.564224",
+			"longitude":"-46.653156"
+		},
+		{
+			"id":12,
+			"nome": "NATAL R$ 319.400,00",
+			"desc": "AVALIAÇÃO R$ 319.400,00 Apartamento - Ocupado - AV CAP MOR GOUVEIA,N. 01135 Apto. 1703 BL B AP1703, NOSSA SENHORA DE NAZARE - CEP: 59060-400, NATAL - RIO GRANDE DO NORTE. quarto, varanda, área de serviço, suite, WC, sala, cozinha. APTO 70,13M2. 02 QUARTOS, SENDO UM DELES SUÍTE; SALA; COZINHA; BANHEIRO; ÁREA DE SERVIÇO E VARANDA. CONSTA LAUDÊMIO.",
+			"url_info": "http://www1.caixa.gov.br/Simov/busca-imovel.asp?sltTipoBusca=imoveis#",
+			"url_foto": "http://www1.caixa.gov.br/fotos/F155552602259521.jpg",
+			"url_video": "http://www1.caixa.gov.br/fotos/F155552602259521.jpg",
+			"latitude": "-23.564224",
+			"longitude":"-46.653156"
+		}
+
+	],
+	"terrenos" : [
+		{
+			"id":21,
+			"nome": "PARNAMIRIM R$ 144.611,77",
+			"desc": "AVALIAÇÃO R$ 175.000,00 - LOTEAMENTO MIRAMAR 360m2 - Venda Direta - AV PRAIA DE COTOVELO,N. 98 QD 13 LT 98, COTOVELO (DISTRITO LITORAL), PARNAMIRIM",
+			"url_info": "http://www1.caixa.gov.br/fotos/F000001000435121.jpg",
+			"url_foto": "http://www1.caixa.gov.br/fotos/F000001000435121.jpg",
+			"url_video": "http://www1.caixa.gov.br/fotos/F000001000435121.jpg",
+			"latitude": "-23.564224",
+			"longitude":"-46.653156"
+		},
+		{
+			"id":22,
+			"nome": "PARNAMIRIM R$ 39.780,00",
+			"desc": "AVALIAÇÃO R$ 46.800,00   Terreno - Desocupado - Venda Direta Online - RUA PROJETADA,N. 16 LT 768 QD 40, NOVA PARNAMIRIM",
+			"url_info": "http://www1.caixa.gov.br/Simov/busca-imovel.asp?sltTipoBusca=imoveis#",
+			"url_foto": "http://www1.caixa.gov.br/fotos/F000001000291321.jpg",
+			"url_video": "http://www1.caixa.gov.br/fotos/F000001000291321.jpg",
+			"latitude": "-23.564224",
+			"longitude":"-46.653156"
+		}
+
+	]
+}

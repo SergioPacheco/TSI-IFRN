@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="title">
+        Cadastro Usuario
+    </ui:define>
+
+    <ui:define name="body">
+        <f:metadata>
+        	<f:viewParam name="id" value="#{cadastroUserMB.idUser}" converter="javax.faces.Long"/>
+        	<f:event listener="#{cadastroUserMB.inicializar()}" type="preRenderView"></f:event>
+        </f:metadata>
+
+        <adm:breadcrumb title="Cadastro User #{cadastroUserMB.user.id}" link="cadastro-user.xhtml?id=#{cadastroUserMB.user.id}"/>
+        <h:form id="form" prependId="false">
+            <p:focus/>
+
+			
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton value="Salvar" update="@form"
+                        				 action="#{cadastroUserMB.salvar()}"
+                                         icon="fa fa-check" styleClass="btn-primary"/>
+                        <p:spacer width="5"/>
+
+                        <p:commandButton value="Excluir" process="@this"
+                        				 rendered="#{cadastroUserMB.user.edicao}"
+                        				 action="#{cadastroUserMB.excluir()}"
+                                         icon="fa fa-trash"
+                                         styleClass="btn-danger">
+                        </p:commandButton>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Voltar" immediate="true"
+                                         action="lista-user?faces-redirect=true"
+                                         process="@this"
+                                         icon="fa fa-close"/>
+                                         
+                    </div>
+                    
+                    <p:splitButton value="Salvar" update="@form"
+                                   icon="fa fa-check"
+                                   action="#{cadastroUserMB.salvar()}"
+                                   styleClass="hidden-md hidden-lg btn-primary">
+                        <p:menuitem value="Excluir"
+                        			rendered="#{cadastroUserMB.user.edicao}"
+                        			action="#{cadastroUserMB.excluir()}"
+                                    process="@this"
+                                    icon="fa fa-trash"/>
+                        <p:separator/>
+                        <p:menuitem value="Voltar" action="lista-user?faces-redirect=true" process="@this"
+                                    icon="fa fa-close"/>
+                    </p:splitButton>
+
+                    
+
+                    <p:separator/>
+
+                    <div class="ui-fluid">
+                    	<!--  <p:panelGrid id="capaPanel" columns="4" layout="grid">  -->
+                    	 <p:panel id="panel" header="New User">
+                    	 
+                    	 <p:messages id="msgs" />
+                    	
+                    	 <p:panelGrid id="capaPanel" columns="3" cellpadding="5">
+                    	
+                    	   
+                    		<p:outputLabel value="Username" for="username"/>
+                    		<p:inputText id="username" value="#{cadastroUserMB.user.username}" required="true" label="Username"/>
+                    			 
+                    	    <p:message for="username" display="icon" />
+                    	    
+                    		<p:outputLabel value="Password" for="password"/>
+                    		<p:inputText id="password" value="#{cadastroUserMB.user.password}" required="true" label="Password"/>
+                    			 
+                    		<p:message for="password" display="icon" />
+                    		
+                    		<p:outputLabel value="Role" for="role" required="true" />
+                    		<p:selectOneMenu id="role" value="#{cadastroUserMB.user.roli} ">
+                    			<f:selectItem itemLabel="Selecione"/>
+                    			<f:selectItem itemLabel="Administrador" itemValue="1"/>
+                    			<f:selectItem itemLabel="Usuario" itemValue="2"/>                    		
+                    		</p:selectOneMenu>
+                    		<p:message for="role" display="icon" />
+                    		
+                    		                    	
+                    	</p:panelGrid>
+                    	
+                    	</p:panel>
+                    
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

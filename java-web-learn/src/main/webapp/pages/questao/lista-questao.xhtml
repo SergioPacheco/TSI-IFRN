@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="head-end">
+        <style type="text/css">
+            .ui-grid-row .ui-grid-col-2,
+            .ui-grid-row .ui-grid-col-10 {
+                padding: 0.5em 0;
+                margin-left: 10px;
+            }
+
+            .ui-orderlist .ui-orderlist-list {
+                height: auto;
+            }
+
+            .ui-orderlist .ui-grid-row .ui-grid-col-2,
+            .ui-orderlist .ui-grid-row .ui-grid-col-10 {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="title">
+        Pesquisa Questao
+    </ui:define>
+
+    <ui:define name="description">
+        Pesquise de acordo com os filtros 
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Pesquisa Questao"/>
+
+			<h:form>
+            	<div class="box box-primary">
+                	<div class="box-header with-border">
+                    	<p:commandButton action="cadastro-questao?faces-redirect=true" ajax="false" icon="fa fa-plus"
+                         	            value="Novo" styleClass="btn-primary"/>
+                    	<p:spacer width="5"/>
+	                    <p:commandButton value="Excluir Selecionado(s)" icon="fa fa-trash" styleClass="btn-danger"
+	                    			     action="#{listaQuestaoMB.excluirSelecionados()}"
+	                                     process="@form" update="@form"/>
+	                    <p:spacer width="5"/>
+	                    <p:commandButton value="Olhar Selecionado(s)" 
+	                    				 oncomplete="PF('questaoSelecionadas').show()"
+	                    				 update="@(.ui-dialog)" 
+	                    				 styleClass="btn-info"
+	                                     icon="fa fa-search"/>
+	                    <p:separator/>
+	                    
+	                    
+	                    <p:dataTable id="questaoTable" widgetVar="questaoTable" rows="6"
+	                    			 value="#{listaQuestaoMB.questaos}" var="questao" rowKey="#{questao.id}"
+	                    			 selection="#{listaQuestaoMB.questaoSelecionadas}"	                    			 
+	                                 paginator="true" 	                                 
+	                                 paginatorPosition="bottom"	                                 
+	                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+	                                 currentPageReportTemplate=""
+	                                 rowsPerPageTemplate="5,10,15,20,30">
+	
+	
+	
+	                        <p:column selectionMode="multiple" width="5%" styleClass="align-center"/>
+	                        
+	                        <p:column headerText="Id"
+	                        		  styleClass="align-center"
+	                        		  width="7%" 	
+	                        	      filterBy="#{questao.id}"
+	                        		  sortBy="#{questao.id}" filterMatchMode="contains">
+	                        	<h:outputLabel value="#{questao.id}" />
+	                        </p:column>
+	                        
+	                        <p:column headerText="Questao"
+	                        		  filterBy="#{questao.nome}"
+	                        		  sortBy="#{questao.nome}" filterMatchMode="contains">
+	                        	
+	                        	<h:link value="#{questao.nome}" outcome="cadastro-questao.xhtml"> 	
+	                        		<f:param name="id" value="#{questao.id}"/>	                        	
+	                        	</h:link>	
+	                        	                        
+	                        </p:column>	 
+	                        
+	                        <p:column headerText="Categoria"
+	                        	      filterBy="#{questao.categoria.nome}"
+	                        		  sortBy="#{questao.categoria.nome}" filterMatchMode="contains">
+	                        	<h:outputLabel value="#{questao.categoria.nome}" />
+	                        </p:column>
+	                        	
+	                    </p:dataTable>
+					</div>
+	            </div>
+        	</h:form>
+        	
+        	<p:dialog header="Questaos Selecionadas" widgetVar="questaoSelecionadas" height="250"
+                  	  width="400" responsive="true" styleClass="box-success">
+	            <p:dataList id="listaQuestaoSelecionadas" value="#{listaQuestaoMB.questaoSelecionadas}" var="questao"
+	                        type="definition">
+	                        
+	                        ID: #{questao.id} - #{questao.nome} 
+
+	            </p:dataList>
+			</p:dialog>
+
+        
+    </ui:define>
+
+</ui:composition>

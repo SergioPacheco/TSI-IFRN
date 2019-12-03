@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:adm="http://github.com/adminfaces"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="title">
+        Teste
+    </ui:define>
+
+	<ui:define name="body">
+	
+	<!--  
+		<f:metadata>
+			<f:event listener="#{testeMB.init()}" type="preRenderView"></f:event>  
+		</f:metadata>
+		
+		-->
+			
+		<h:form id="form" prependId="false">
+			<p:focus />
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<div id="main-buttons" class="hidden-sm hidden-xs">
+						<p:commandButton value="Voltar" immediate="true"
+							action="teste?faces-redirect=true" process="@this"
+							icon="fa fa-close" />
+					</div>
+				 
+					<p:separator />
+
+					<div class="ui-fluid">
+					
+						<p:panelGrid id="capaPanel" columns="1" layout="grid">
+							<p:fieldset id="questoes">
+								<p:panel id="basic" header="Basicc" footer="Parabens!">
+								
+								<ui:repeat var="q" value="#{testeMB.testes.entrySet().toArray()}">
+								 	
+										<p:panelGrid>
+												<h:outputText value="#{q.key.nome}" />
+												<br></br>
+												<h:graphicImage library="imagem" 
+												            	name="#{q.key.imagem}"
+																alt="No image" 
+																rendered="#{not empty q.key.imagem}" 
+																width="531"
+																height="294" />
+												 
+												
+												<p:selectOneRadio	id="check" 
+																		value="#{testeMB.selecoes[q.key]}" 
+																		layout="grid" columns="1"
+																	    required="true" 
+																	    requiredMessage="Escolha um valor">
+													<f:selectItem itemLabel="#{q.value[0]}" itemValue="#{q.value[0]}" />
+														<br></br>
+														<f:selectItem itemLabel="#{q.value[1]}" itemValue="#{q.value[1]}" />
+														<br></br>
+														<f:selectItem itemLabel="#{q.value[2]}" itemValue="#{q.value[2]}" />
+														<br></br>
+														<f:selectItem itemLabel="#{q.value[3]}" itemValue="#{q.value[3]}" />
+														<br></br>
+												</p:selectOneRadio>
+												<p:message for="check" />
+										</p:panelGrid>
+									<p:separator />
+								</ui:repeat>
+							</p:panel>
+
+							</p:fieldset>
+
+							<div style="text-align: center; padding-top: 22px">
+								<p:commandButton value="Submit" update="display" icon="ui-icon-check" oncomplete="PF('dlg').show()" />
+							</div>
+
+							<!--   <p:dialog modal="true" resizable="false" widgetVar="dlg" header="Results" showEffect="clip"> -->
+							<p:dialog header="Seus Pontos" widgetVar="dlg" resizable="true" appendTo="@(body)" responsive="true" width="400" modal="true" styleClass="dialog-login">
+
+								<p:panelGrid id="display" columns="2" cellpadding="5" layout="grid" styleClass="no-border ui-fluid">
+									<f:facet name="header">
+										<p:column colspan="2"> Seus Pontos: #{testeMB.pontos} pontos</p:column>
+									</f:facet>
+									<p:row>
+										<p:column> Questao</p:column>
+										<p:column>Resposta </p:column>
+									</p:row>
+
+									<ui:repeat var="m"
+										value="#{testeMB.mensagens.entrySet().toArray()}">
+										<p:row>
+											<p:column>#{m.key.nome}</p:column>
+											<p:column>#{m.value}</p:column>
+										</p:row>
+									</ui:repeat>
+
+									<p:row>
+										<p:column colspan="2" style="text-align:center">
+											<p:commandButton value="OK" ajax="false" action="teste"/>
+										</p:column>
+									</p:row>
+
+								</p:panelGrid>
+
+							</p:dialog>
+
+
+						</p:panelGrid>
+
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,3141 @@
+Aulas Spring MVC
+
+***************************************************************************
+3.6. Começando o cadastro de documento
+	Tudo funcionando após muito ralo na configuração lembrar de fazer upload
+	da classe java WebMvcConfigurerAdapter clicando na mesma para o maven 
+	fazer upload das dependências.
+	
+	Nota-se a economia de código fonte para o controller levar um objeto via
+	POST sem muita codificação e já levando resposta à View.
+***************************************************************************
+3.7. Introdução a validação do formulário
+	Configuração do Bean Validation: 
+	Saber diferenciar o NotEmpty e NotBlank
+***************************************************************************
+3.8. Forward e Redirect
+	Princípio do funcionamento de Forward e Redirect não confundir
+***************************************************************************
+3.9. Desafio: Validando a descrição
+	ok. Ver Size o parametro min já diz que é obrigatório.
+***************************************************************************
+3.10. Resolvendo problemas de acentuação
+	Configuração para forçar o filter para UTF-8
+	Em preferences e no browser tambem.
+***************************************************************************
+4.2. Thymeleaf vs JSP
+	A razão de uso do thymeleaf
+***************************************************************************
+4.3. Mantendo os dados no formulário
+	Importante entender a complexidade para manter os dados do objeto no 
+formulário e atribuir seus atributos em cada campo do formulário.
+***************************************************************************
+4.6. Plugin do Eclipse para o Thymeleaf
+	 http://www.thymeleaf.org/eclipse-plugin-update-site/
+***************************************************************************
+5.3. Baixando e configurando o layout no projeto
+	http://www.alga.works/sws-layout
+***************************************************************************
+5.4. Prototipando o cadastro da cerveja
+	Treinando edição de layout e design com bootstrap
+***************************************************************************
+5.5. Melhorando a organização do Layout
+	Após adicionar o repositorio do nexus para baixar e inserir a dependencia
+	do thimeleaf dialect no pom, configurar o novo dialeto em webconfig.java
+	para a aplicação entender o novo template em templateEngine (Webconfig)
+	criado pelo desenvolvedor o novo dialeto.
+***************************************************************************
+5.6. Links com URL Expression
+Corrigindo o contexto do projeto nos links, mudando para th:xxx="@{/../../}"
+"context Root"
+***************************************************************************
+5.7. Configurando máscara de dinheiro com jQuery
+***************************************************************************
+5.8. Organizando o layout com fragmentos
+***************************************************************************
+5.9. Prototipando o cadastro rápido de estilo
+***************************************************************************
+5.10. Realizar Desafio: Prototipando o cadastro de cliente
+	- Controller:
+		SEM PARAMETRO: Cliente cliente
+		SEM NESCESSIDADE DO POST
+	- Model:
+		SEM NESCESSIDADE DE CRIAR O MODEL: Cliente
+	- View:
+		SEM NESCESSIDADE DE ATRIBUIR form: 
+			<form method="POST" th:object="${cliente}" class="form-vertical  js-form-loading">
+			BASTAVA
+			<form>
+		FALTOU: autofocus="autofocus" no input DE NOME
+		MEU CPF/CNPJ E TIPO PESSOA FICOU MELHOR
+		MEU TELEFONE E E-MAIL FICOU MELHOR		
+***************************************************************************
+5.11. Desafio: prototipando o cadastro de usuário
+	Ver classe de estilo checkbox-inline
+	ver classe de estilo control-label
+***************************************************************************
+5.12. Bootstrap Switch no status do usuário
+	Baixar e configurar: http://www.bootstrap-switch.org/
+	Tem que voltar aqui pra entender bem a configuração e como chamar na 
+	página. Principalmente a maneira de dispor os javascripts.
+***************************************************************************
+5.13. Desafio: prototipando o cadastro de cidade
+5.14. Desafio: prototipando o cadastro de estilo
+5.15. Adicionando o favicon  	
+***************************************************************************
+6.1. Introdução
+6.2. Configurando o SLF4J com Log4j 2
+6.3. Configurando níveis de log com Log4j2
+	Introdução, configuração e exemplo de uso do log4j2
+***************************************************************************
+7.1. Introdução:  Injeção de dependência com Spring IoC 
+	martinfowler.com/articles/injection.html
+7.2. O ApplicationContext
+7.3. Autowired
+7.4. Escopo dos beans (Singntone)
+		Aulas 6 e 7 Teoricas, tem que fazer o exemplo para entender
+***************************************************************************
+8.1. Introdução: JPA, Hibernate e Flyway
+8.2. Introdução ao JPQL e Hibernate Criteria
+	 Livro interessante sobre JPA é o "Pro JPA 2"	 
+***************************************************************************
+8.3. Mapeamento da entidade Cerveja
+	https://www.draw.io/  criar diagramas de todos tipos
+	Atenção no mapeamento de enuns e os mapeamentos ManyToOne e OneToMany
+***************************************************************************
+8.4. Migrando o banco de dados com Flyway
+	Criação dos DDL = Flyway
+	Interessante, mas tem que ver como foi feita a configuração no eclipse:
+	Em: Run Configurations...
+	Estudar sobre o Flyway e o motivo de não usar o hibernate para geração
+	e criação das tabelas do zero ou em desenvolvimento.
+	Lembrar que se pode criar Microserviços para não precisar derrubar a 
+	aplicação em produção e/ou utilizar trigger/funções em hibernate/JPA
+***************************************************************************
+9.1. Introdução: Spring Data JPA e Padrão Repository 
+	Métodos prontos como salvar, deletar e consultar.
+***************************************************************************
+9.2. Configurando o projeto com Spring Data
+	Várias configurações: alterações de arquivos e criação de novos para essa
+	configuração:
+	Olá fiquei curioso a respeito dessa propriedade, pois tive um problema semelhante
+	usando EJB e fiz uma correção parecida com essa. Onde eu configuro isso? 
+	Preciso criar um hibernate.cfg.xml junto do context.xml? 
+	Tem uma "cola" de como ficaria essa configuração?
+	Acho que descobri... é no proprio context.xml, propriedade idleConnectionTestPeriod="100"
+***************************************************************************
+9.3. O JpaRepository
+	Métodos exemplo nos repositorio Cervejas
+	//public Optional<Cerveja> findBySku(String sku);
+	//public Optional<Cerveja> findBySkuIgnoreCase(String sku);
+	
+	Injeçao do repositorio e exemplo de uma consulta através do método gerado no repositorio.
+	/*@Autowired
+	private Cervejas cervejas;
+	
+	@RequestMapping("/cervejas/novo")
+	public String novo(Cerveja cerveja) {
+		//cervejas.findAll(); //Teste, será apagado.
+		Optional<Cerveja> cervejaOptional = cervejas.findBySku("AA0001");//Teste, será apagado.
+	if(cervejaOptional.isPresent()){
+		cervejaOptional.get();
+		cervejaOptional.orElse(new Cerveja());
+		
+	}
+		Optional<Cerveja> cervejaOptional = cervejas.findBySkuIgnoreCase("AA0001");//Teste, será apagado.
+		System.out.println(cervejaOptional.isPresent());
+		
+		return "cerveja/CadastroCerveja";
+	}
+	*/
+***************************************************************************
+9.4. Repository vs DAO
+	Repository - Boas práticas do TDD: Domain Drive Design - Eric Evans
+***************************************************************************
+9.5. Montando os combos e radio do cadastro da cerveja
+	Model - ver conceito.
+	Buscando dados do banco e dos Enumns
+***************************************************************************
+9.6. Usando o th:field
+	Ligação dos campos com os atributos do objeto cerveja
+***************************************************************************
+9.7. Fazendo o bind do estilo com a cerveja
+	Criar o conversor EstiloConverter, depois registrá-lo em WebConfig com
+	uma anotação @Bean.
+	Para valor não vir nulo e vazio:
+	if(codigo != null && !codigo.trim().equals("")){ ... }
+	ou usando o spring:
+	if(!StringUtils.isEmpty(codigo)){ ... }
+***************************************************************************
+9.8. Iniciando a transação para salvar a cerveja
+	O livro do Martin Fowler sobre "Refactoring" é muito bom, esse aqui: 
+	http://martinfowler.com/books/refactoring.html
+***************************************************************************
+10. Validação customizada e conversores
+10.1. Mostrando mensagens do cadastro de cerveja
+	Include de mensagem de erro e mensagem de sucesso.
+***************************************************************************
+10.2. Validação customizada com Bean Validation
+	Validações de campos personalizados para o sistema.
+	Cria a anotarion (Interface) no pacote validation: @SKU
+	Na interface(anotação) dizer onde que ela pode ser aplicada:
+	@Target = nos atributos, métodos e poder usar em outras anotações
+	@Retention = Anotacao que sera avaliada em tempo de execucao
+	@Constraint = È uma restrição: Para que faça validação podendo ser passado uma classe
+	@Pattern(regexp = "([a-zA-Z]{2}\\d{4})?")//Padrão realizado e ? para fazer validacao só se houver dados
+***************************************************************************
+10.3. Convertendo valores numéricos
+	Registrar conversores e o bean de locale forçando como padrão o PT-BR
+	bem como as configurações de javascript.
+***************************************************************************
+10.4. Desafio: Validando campos da cerveja
+	Valor não pode ser maior que 9 milhoes, usar decimal Max
+	comissão 100%
+***************************************************************************
+10.5. Formatando input com erro
+	Configurações de css no thymeleaf e bootstrap
+***************************************************************************
+10.6. Desafio: Implementar o cadastro do estilo
+	Porque não precisou do parametro Model no controller.
+	Rever a Criação do Model em Cadastro Cerveja.
+***************************************************************************
+11. Tratando exceções, callbacks JPA e Ajax
+11.1. Validando se existe um estilo persistido
+	A regra de negocio é sempre feita no pacote service, no controller vc
+	chama no metodo valida no service. Nunca validar no controller.
+***************************************************************************
+11.2. Salvando o estilo com Ajax: diálogo de cadastro rápido
+	Macete do banco de dados para excluir dados.
+	Lembrando: "#" = busca pelo id e "." = busca pela classe
+	Cria 3 variaveis:
+	var modal  / 	var botaoSalvar  /  var form 
+	para buscar as tags que precisamos e salva esse conteuno na variavel
+	
+	Atraves da:
+		form.on('submit', function(event){ event.preventDefault() });
+		Evita apertar o "Enter" e submeter o formulário
+		
+	A variavel var inputNomeEstilo = $('#nomeEstilo'): busca a tag input e salva
+	na variavel.
+	
+	A variavel var url = form.attr('action'); Pega o atributo action do
+	formulário = "/brewer/estilos" definido no form do cadastro rápido:
+	
+	<form class="form-horizontal" th:action="@{/estilos}"> // Lembrar de adicionar
+	no EstilosController
+	
+	O auto-focus  autofocus="autofocus" do nome estilo está perdendo sua 
+	funcionalidade devido ao eventos do bootstrap, então vamos colocar no
+	javascript: sendo baseado na captura do evento quando o modal acaba de ser 
+	carregado, ele lança esse evento, daí fazemos o auto-focus com jQurey:
+	
+	Capturando o evento e chamando a função onModalShow:
+	modal.on('shown.bs.modal', onModalShow)
+	Essa função chama o inputNomeEstilo.focus(); ou seja chama o focus pra ela 
+	
+	Agora vamos limpar o input quando o modal for fechado:
+	Tambem busca pelo evento toda vez que o modal é fechado:
+	modal.on('hide.bs.modal', onModalClose) e chamando a funcao onModalClose
+	que coloca no input uma string vazia.
+	
+	É onde vc brinca quando um modal é carregado e podemos usar esses eventos
+	pra mostrar alguma coisa ou uma função.
+	
+	Agora vamos submeter algo ao servidor:
+	pegamos o botao salvar e adicionamos uma funcao no click do botao:
+	botaoSalvar.on('click', onBotaoSalvarClick);
+	Essa funcao vai executar um ajax ao servidor para tentar salvar o estilo:
+	Ela pega o nome do estilo do input e lanca na variavel nomeEstilo eliminando
+	os espacos que vem depois pelo trim:
+	
+	var nomeEstilo = inputNomeEstilo.val().trim();
+	
+	Agora usar a funcao do jQuery ajax para submeter uma requisição ajax para
+	salvar isso no servidor: $.ajax({});
+	
+	Propriedades para submissão ajax:
+	url ("/estilos"), 
+	method (POST), 
+	tipo de contentType (JSON), 
+	data (dados para envio = JSON), 
+	error (tratamento dos erros = "onErroSalvandoEstilo()"), e
+	success = "onEstiloSalvo"
+	
+	Lembrar de adicionar biblioteca do JSON para converter em objetos java	
+***************************************************************************
+11.3. Mapeando o controller e mais sobre o ResponseEntity
+	@RequestMapping("/estilos") para mapeamento dos métodos do controller	
+***************************************************************************
+11.4. Tratando exceções com ExceptionHandler
+	O codigo fica mais legivel e curto com a criação do exception Handler
+	ControllerAdviceExceptionHandler.class	
+***************************************************************************
+11.5. Callbacks JPA - Salvando SKU com caixa alta
+	Métodos Callbacks, existem vários nesse caso é:
+	@PrePersist @PreUpdate
+	private void prePersistUpdate(){}, ou seja antes de persistir e de update
+	vai executar esse método com suas funções.
+	
+	Existe ainda @PostLoad = depois que foi carregado do banco de dados
+	fazer algo com a entidade
+	@PreDestroy
+	@PreRemove antes de apagar do banco de dados fazer algo na entidade
+***************************************************************************
+12. Modularizando o JavaScript
+12.1. Module Pattern e Namespaces
+	Addy Osmani .com livro = addyosmani.com engenheiro do google.
+	Module Pattern e Namespaces
+***************************************************************************
+12.2. Modularizando a máscara de dinheiro
+	Modularização do JavaScript começando pelo maskMoney:
+	
+	Criar o objeto NameSpaces da aplicação para sempre adicionar as funções = Brewer:
+	
+	var Brewer = Brewer || {}; // Se o objeto existe beleza se nao cria um novo
+	
+	Brewer.MaskMoney Criar a função construtora pra iniciar dentro do namespace
+	criando uma mistura de model patter e função construtora com letra maiuscula
+	Lembrar que pra executar deve abrir e fechar parenteses.
+	
+	Cria-se a função e já faz o retorno da mesma.
+	
+	return MaskMoney;
+	
+	As variaveis de inicialização se tornam this dentro da função construtora:
+	this.decimal = $('.js-decimal');
+	this.plain = $('.js-plain');
+	
+	E as execuções vão para dentro do prototype:
+	
+	MaskMoney.prototype.enable
+	
+	Referenciando como this:
+	
+	MaskMoney.prototype.enable = function(){
+	
+			this.decimal.maskMoney({ decimal: ',', thousands: '.' });
+			this.plain.maskMoney({ precision: 0, thousands: '.'});
+			
+		}
+	
+	O enable é para o caso de criar um outra função para desabilitar.
+	
+	Agora para executar:
+	Depois de carregada a declaração da função no nameSpace (Objeto Global),
+	chamamos a função construtora na declaração da variavel e habilitando:
+	
+	var maskMoney = new Brewer.MaskMoney();
+	maskMoney.enable(); 
+	
+	Finalizando a modularização.	 
+***************************************************************************
+12.3. Modularizando o cadastro rápido de estilo
+	Ver niveis de funções novamente e estudar com calma.
+***************************************************************************
+13. Estendendo o Thymeleaf
+13.1. Dialetos e processadores
+	Dialetos: th, layout = nome com conjunto de processadores
+	Processadores que implementa as tags
+	
+	Dialeto novo e alguns processadores
+	
+	Docs do Thymeleaf - Read Online
+	
+	Example Aplication como estender o thymeleaf
+***************************************************************************
+13.2. Novo atributo para classe de erro
+	Cria o processador depois o Dialeto.
+	Lembrar do espaço para separar as classes existentes da concatenação.
+	Interessante para selecionar tipo de classe pra jogar na página.
+***************************************************************************
+13.3. Novo elemento para mensagens
+	Criar atributos e criar elementos para tags do sistema para uso em html
+	Foi percebido uma mudança no script, professor foi perguntado sobre a 
+	solução em 03/08/16.
+	Problema foi solucionado: faltava referenciar o form no javascript: para
+	"this.form"
+***************************************************************************
+13.4. Desafio: Removendo duplicação da tag html
+	Interessante para inserir códigos de páginas dentro de outras dinamicamente	
+***************************************************************************
+14. Upload da foto e retorno assíncrono
+14.1. Conhecendo o UIKit
+	getuikit.com/docs/upload.html
+***************************************************************************
+14.2. Componente de upload da foto com drag and drop
+	O CSS não funcionou arrastando o arquivo
+	Após a correção do script o CSS funcionou perfeitamente.
+***************************************************************************
+14.3. Upload da foto com Ajax
+	Atualmente recebe via post em cervejas/novo
+	No script vamos fazer o post:
+	action: '/brewer/fotos'
+	
+	Então criamos um controller = FotosController
+	
+	Em RequestPayload vc vê o nome do parametro que ele está passando:
+	
+Request Payload
+------WebKitFormBoundaryXPcbltAfnAAlpZGJ
+Content-Disposition: form-data; name="files[]"; filename="AldemirMartins1.jpg"
+Content-Type: image/jpeg
+
+	Classe:
+	@PostMapping
+	//@RequestMapping(method = RequestMethod.POST) // Mesma coisa da anotação acima nesta nova versao do 4.3 do Spring
+	private String  upload(MultipartFile[] files){
+		//Vamos ver o que está recebendo
+		System.out.println(">>> files: "+ files.length);
+		return "ok!";
+		
+	}
+	
+	e aqui vemos o servidor recebendo o arquivo de foto
+	@PostMapping
+	private String  upload(@RequestParam("files[]") MultipartFile[] files){
+		//Vamos ver o tamanho do array
+		System.out.println(">>> files: "+ files[0].getSize());
+		return "ok!";
+		
+	}	
+***************************************************************************
+14.4. Melhorando a disponibilidade da aplicação - retorno assíncrono
+	Estudo bem complexo para entender a disponibilidade da aplicação
+***************************************************************************
+14.5. Salvando o nome da foto da cerveja
+	Complexidade para pegar o nome da foto e o contentType para salvar no
+	banco.
+***************************************************************************
+14.6. Criando pastas para salvar fotos
+	Iremos salvar a foto no sistema de arquivos no servidor iremos criar uma
+	implementação: interface e bean , para poder trocar se for nescessário:
+	Testes, produção, desenvolvimento, nuvem, etc, poderiamos trocar de acordo
+	com o perfil.
+	Criaremos o diretório para depois salvar:
+	A classe local: FotoStorageLocal nela vamos criar um construtor padrão e
+	duas variaveis locais do tipo Path que serão o local padrão e temporario
+	pois quando fizer o upload salva no temporario e quando salvar move do
+	temporario para o local padrão do sistema. No local temporario pode criar
+	uma tarefa que fique olhando no diretorio temporario se tem arquivos antigos
+	com mais de uma hora e apaga algo deste tipo.
+	
+	public class FotoStorageLocal {
+
+		private static final Logger logger = LoggerFactory.getLogger(FotoStorageLocal.class);
+	
+		private Path local;
+		private Path localTemporario;
+		
+		public FotoStorageLocal() {
+			
+		}
+	}
+	
+	No construtor, vamos definir um local e atribuir ao HOME do usuario:
+	
+	public class FotoStorageLocal {
+
+		private static final Logger logger = LoggerFactory.getLogger(FotoStorageLocal.class);
+	
+		private Path local;
+		private Path localTemporario;
+		
+		public FotoStorageLocal() {
+			this.local = getDefault().getPath(System.getenv("HOME"), ".brewerfotos");
+			criarPastas();
+		}
+	
+		private void criarPastas() {
+			try {
+				Files.createDirectories(this.local);
+				this.localTemporario = getDefault().getPath(this.local.toString(), "temp");
+				Files.createDirectories(this.localTemporario);
+				//Files.createTempDirectory(prefix, attrs); //Apagado imediatamente
+				
+				if(logger.isDebugEnabled()){
+					logger.debug("Pastas criadas para salvar fotos.");
+					logger.debug("Pasta default: " + this.local.toAbsolutePath());
+					logger.debug("Pasta temporária: " + this.localTemporario.toAbsolutePath());
+				}
+			} catch (IOException e) {
+				throw new RuntimeException("Erro criando pasta para salvar foto", e);
+			}
+		}
+	}
+	
+	Agora vamos pegar essa classe e transformar num bean, se vai ser usada no serviço
+	então criamos no ServiceConfig no pacote config:
+	
+	@Configuration
+	@ComponentScan(basePackageClasses = CadastroCervejaService.class)
+	public class ServiceConfig {
+		
+		@Bean
+		public FotoStorageLocal fotoStoragelocal(){
+			return new FotoStorageLocal();
+		}
+	}
+	
+	Mas se precisarmos mudar a implementação para S3 da amazon por exemplo
+	Daí teríamos que sair mudando tudo que está usando ela, então faremos 
+	uma interface chamada FotoStorage dentro de storage:
+	
+	public interface FotoStorage {
+
+	}
+	
+	Fazendo com que alteremos as classes:
+	
+	public class FotoStorageLocal implements FotoStorage{
+	 ...
+	 
+	public class ServiceConfig {
+	
+		@Bean
+		public FotoStorage fotoStorage(){
+			return new FotoStorageLocal();
+		}
+	}
+	
+	Para se precisarmos trocar a implementação basta trocar o new FotoStorageLocal();
+	Veremos isso mais adiante.
+	E onde vamos usar no Runnable, para isso a interface vai:
+	
+	public void salvarTemporariamente(MultipartFile[] files);
+	
+	O que deve ser implementado este metodo em FotoStorageLocal:
+	
+	@Override
+	public void salvarTemporariamente(MultipartFile[] files) {
+		System.out.println(">>>> Salvando a foto temporariamente...");
+	}
+	
+	Mas como passamos um bean do FotoStorage para FotoStorageRunnable:
+	O @Autowired não vai funcionar porque esse bean não é gerenciando pelo
+	FotoStorageRunnable, então vamos colocar dentro do FotosController:
+	
+	@Autowired
+	private FotoStorage fotoStorage;
+	
+	E podemos passar ele no construtor:
+	
+	Thread thread = new Thread(new FotoStorageRunnable(files, resultado, fotoStorage));
+	thread.start();
+	
+	Tendo assim que alterar o construtor do Runnable:
+	
+	public class FotoStorageRunnable implements Runnable {
+		private MultipartFile[] files;
+		private DeferredResult<FotoDTO> resultado;
+		private FotoStorage fotoStorage; 
+	
+		public FotoStorageRunnable(MultipartFile[] files, DeferredResult<FotoDTO> resultado, FotoStorage fotoStorage) {
+			this.files = files;
+			this.resultado = resultado;
+			this.fotoStorage = fotoStorage;
+		}
+	
+		@Override
+		public void run() {
+			this.fotoStorage.salvarTemporariamente(files);
+			String nomeFoto = files[0].getOriginalFilename();
+			String contentType = files[0].getContentType();
+			resultado.setResult(new FotoDTO(nomeFoto, contentType));
+		}
+	}
+	
+	Em seguida faremos o teste pra ver se está criando o diretorio.
+	Vamos mostrar no Logger, tudo que for do brewer debug nós veremos:
+	
+	<Logger name="com.algaworks.brewer" level="debug"/>
+	
+	E se na hora de passar o bean quiséssemos trocar o path, criamos e 
+	modificamos os construtores em FotoStorageLocal:
+	
+	public FotoStorageLocal() {
+		this(getDefault().getPath(System.getenv("HOME"), ".brewerfotos"));
+	}
+	
+	public FotoStorageLocal(Path path){
+		this.local = path;
+		criarPastas();
+	}
+***************************************************************************
+14.7. Salvando a imagem temporária
+	Implementaremos o método salvarTemporariamente da classe FotoStorageLocal
+	que já está sendo chamado através do FotoStorageRunnable que é chamado
+	do FotosController e tambem já está sendo passado o array dos arquivos:
+	files que é enviado de cada vez:
+	
+	@Override
+	public void salvarTemporariamente(MultipartFile[] files) {
+		if(files != null && files.length > 0){
+				
+		}
+	  }
+	} 
+	
+	Colocamos esta condição para evitar um NullPointException ou um 
+	ArrayIndexNotBound:
+	Pegamos o arquivo:
+	
+	MultipartFile arquivo = files[0];
+	
+	E agora salvamos ele direto na pasta pelo método que recebe um file que
+	é instanciado e passamos o caminho concatenando com o separador e o nome
+	do arquivo o qual será lançado uma exceção e vamos capturar:
+
+	@Override
+	public void salvarTemporariamente(MultipartFile[] files) {
+		if(files != null && files.length > 0){
+			MultipartFile arquivo = files[0];
+			try {
+				arquivo.transferTo(new File(this.localTemporario.toAbsolutePath().toString()
+						+ getDefault().getSeparator()+arquivo.getOriginalFilename()));
+			} catch (IOException e) {
+				throw new RuntimeException("Erro salvando a foto na pasta temporária", e);
+			}
+		}
+	}
+	
+	Upload com sucesso e nome do arquivo.
+	Uma boa implementação de código é sempre deixar os métodos privados no 
+	final.
+	
+	Criamos outro método privado renomearArquivo(String nomeOriginal)
+	O UUID é um meio que gera uma sequencia de caracters bem grande ficando
+	impossível de se repetir, não correndo o risco de sobrescrever uma foto:
+	
+	private String renomearArquivo(String nomeOriginal){
+		String novoNome = UUID.randomUUID().toString() + "_" + nomeOriginal;
+		
+		if(logger.isDebugEnabled()){
+			logger.debug(String.format("Nome original: %s, novo nome: %s", nomeOriginal, novoNome));
+		}
+		
+		return novoNome;
+	}
+	
+	E chamamos ela no método anterior:
+	
+	...
+	try {
+				arquivo.transferTo(new File(this.localTemporario.toAbsolutePath().toString()
+						+ getDefault().getSeparator()+renomearArquivo(arquivo.getOriginalFilename())));
+	...
+	
+	Tal procedimento ainda não levou o nome grande para a view o que faremos abaixo:
+	Editamos o salvarTemporariamente:
+	
+	@Override
+	public String salvarTemporariamente(MultipartFile[] files) {
+		String novoNome = null;
+		if(files != null && files.length > 0){
+			MultipartFile arquivo = files[0];
+			novoNome = renomearArquivo(arquivo.getOriginalFilename());
+			try {
+				arquivo.transferTo(new File(this.localTemporario.toAbsolutePath().toString() + getDefault().getSeparator() + novoNome));
+			} catch (IOException e) {
+				throw new RuntimeException("Erro salvando a foto na pasta temporária", e);
+			}
+		}
+		return novoNome;
+	}
+	
+	E no Runnable:
+	
+	@Override
+	public void run() {
+		String nomeFoto = this.fotoStorage.salvarTemporariamente(files);
+		String contentType = files[0].getContentType();
+		resultado.setResult(new FotoDTO(nomeFoto, contentType));
+	}
+	
+***************************************************************************
+14.8 Mostrando a foto na tela
+	Primeiro faremos um mapeamento no controller:
+	
+	@GetMapping("/temp/{nome}")
+	public byte[] recuperarFotoTemporaria(@PathVariable String nome){
+		return fotoStorage.recuperarFotoTemporaria(nome);
+	}
+	
+	Esse método recupera a foto e retornando um array de byte, nescessita 
+	de um parametro que é o nome do arquivo e o @PathVariable é o path que
+	é levado ao mapeamento na get da página @GetMapping (que neste mapeamento
+	ele recebe uma variavel nome que deve ser mesmo nome no parametro do
+	método).
+	Esse método para retornar esse array de byte do arquivo ele chama outro
+	método da implementação(interface) FotoStorage o recuperarFotoTemporaria
+	recebendo o nome do arquivo, abaixo veremos como subscrever esse método
+	na classe FotoStorageLocal:
+	
+	@Override
+	public byte[] recuperarFotoTemporaria(String nome) {
+		try {
+			return Files.readAllBytes(this.localTemporario.resolve(nome));
+		} catch (IOException e) {
+			throw new RuntimeException("Erro lendo a foto temporária", e);
+		}
+	}
+	
+	Aqui usamos a api do java.nio onde precisamos passar um Path, onde que
+	está o arquivo que queremos retornar, então buscamos o diretorio temporario
+	e como o metodo readAllBytes precisa de um Path passamos pra ele não 
+	somente o Path mas um resolve para passar tambem o nome do arquivo, daí
+	tratamos esse método com um excessão que alteramos ela de uma checada
+	para uma RuntimeException falando sobre o erro.
+	
+	Ainda tivemos que alterar o mapeamento, pois o spring não entende a extensão
+	por isso passamos uma expressão .* (qualquer coisa) sem isso o spring pensa
+	que é uma extensão.
+	
+	@GetMapping("/temp/{nome:.*}")
+	 
+	Agora que o src está funcionando vamos jogar isso na view da página para
+	mostrar essa foto:
+	
+	Oculta esta div:
+	
+	<div id="upload-drop" class="bw-upload hidden">
+		<i class="glyphicon  glyphicon-cloud-upload"></i>
+		<span>Arraste a foto aqui ou</span>
+		<a class="bw-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
+	</div>
+	
+	Mostrando outra div:
+						
+	<div class="row">
+		<div class="col-md-4"></div>
+			<div class="col-md-4 text-center">
+				<a href="#" class="thumbnail">
+				<img th:src="@{/fotos/temp/1311201a-21eb-40ab-8589-3c0757145897_logoEduseg.png}" > </img>
+				</a>
+				<button type="button" class="btn btn-link"><span class="glyphicon glyphicon-remove"></span></button>
+			</div>
+		<div class="col-md-4"></div>
+	</div>
+	
+	Para resolver isso dinamicamente iremos usar javascript e um template
+	com uma biblioteca de javascript chamada: http://handlebarsjs.com/
+	dowload em cdns: handlebars.min.js salva ele em static/javascripts/vendors
+	no site tem toda documentação e exemplos para poder aplicar.
+	Com ela iremos pegar nossa variavel que já está em javascript e fazer 
+	com que seja gerado um (template) html e jogado na página.
+	Importamos o javascript na página block javascript-extra:
+	
+	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
+	
+	Iremos criar um foto-cerveja.html e coloca-lo em uma nova pasta hbs em templates
+	Todos templates de handlebars serão colocados nessa pasta, veja que o nome agora
+	será dinamicamente informado:
+	
+	<script id="foto-cerveja" type="text/x-handlebars-template">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4 text-center">
+				<a href="#" class="thumbnail"> 
+					<img th:src="@{/fotos/temp/{{nomeFoto}}}"></img>
+				</a>
+				<button type="button" class="btn btn-link">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</script>
+	
+	Agora importamos esse template para a pagina CadastroCerveja e retirando
+	a div que já foi acrescentada anteriormente:
+	
+	<th:block th:replace="hbs/FotoCerveja"></th:block>
+	
+	Agora vamos fazer com que o handlebars compile esse template na página
+	dinamicamente, após o término do upload da foto, então na mesma função
+	do upload vamos criar um variavel para compilar esse template passando
+	um source: um html:
+	
+	var template = Handlebars.compile(htmlFotoCervejaTemplate);
+	
+	Para isso criamos outra variavel para ser este source:
+	
+	var htmlFotoCervejaTemplate = $('#foto-cerveja').html();
+	
+	.html(); = é para recuperar o conteúdo html desse javascript.
+	
+	Agora com esse template em mãos que é uma função do Handlebars vamos
+	carregado com o contexto que precisamos, no caso o proprio template com
+	os parametros definidos, nosso objeto nomeFoto e sua resposta.nome
+	que é o arquivo:
+	
+	var htmlFotoCerveja = template({nomeFoto: resposta.nome});
+	
+	Agora que temos o HTML em mãos precisamos adiciona-lo em algum lugar, ou
+	seja no mesmo lugar da div que insere o arquivo, para isso iremos fazer
+	também via javascript uma função, então iremos inserir essa div em outra
+	para poder adicionar um hidden para ocultar e realizar um append inserindo
+	nosso novo html da foto e nomeamos uma classe javascript pra ela js-foto-cerveja:
+	
+	<div class="js-foto-cerveja">
+		<div id="upload-drop" class="bw-upload hidden">
+			<i class="glyphicon  glyphicon-cloud-upload"></i>
+			<span>Arraste a foto aqui ou</span>
+			<a class="bw-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
+		</div>
+	</div>
+	
+	Agora pegamos o id da div e adicionamos a classe hidden pra sumir com ele:
+	
+	$('upload-drop').addClass('hidden');
+	
+	Em seguida criamos outra variavel containerFotoCerveja para receber a div
+	que criamos através da classe:
+	
+	var containerFotoCerveja = $('.js-foto-cerveja');
+	
+	E nessa variável realizamos o append recebendo nosso html e apresentando
+	na página, pois já houve a compilação, sumindo o que está aparecendo e 
+	fazendo aparecer o novo:
+	
+	containerFotoCerveja.append(htmlFotoCerveja);
+	
+	Agora iremos implementar o botão "X"
+***************************************************************************
+14.9 - Refatorando script do upload da foto
+
+	Resumindo o js e alinhando estrutura
+	
+	Tenho uma pequena dúvida:
+	Quando realizamos a o refatoramento do script precisamos utilizar o thymeleaf na seguinte div:
+
+	<div class="js-container-foto-cerveja" th:attr="data-url-fotos=@{/fotos}">
+	  <div id="upload-drop" class="bw-upload">
+		<i class="glyphicon  glyphicon-cloud-upload"></i>
+		<span>Arraste a foto aqui ou </span>
+		<a class="bw-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
+	  </div>
+	</div>
+
+	Foi nescessário atribuir o valor para o atributo:
+	
+	th:attr="data-url-fotos=@{/fotos}"
+	
+	No javascript, dentro do nosso prototype o action de settings foi atribuído da seguinte forma:
+	
+	action: this.containerFotoCerveja.data('url-fotos'),
+	
+	Pergunto se é um padrão do JQuery a definição do contexto, reduzir o valor que foi definido no thymeleaf de:           "data-url-fotos" para apenas 'url-fotos'
+	Devo utilizar sempre assim quando for nescessário definir um outro contexto, ou seja, sempre atribuir no thymeleaf um nome qualquer antecedido de "data-url-xxx"?
+	
+	Olá Deusyvan.
+	Isso mesmo, todo data-* você pode recuperar digitando apenas o que vem depois do data- quando usar a função data() do jQuery. 
+	 
+***************************************************************************
+14.10 - Mantendo a foto na validação
+	Fazer com que o javascript avalie e execute a função que mostra a foto
+	
+	Boa noite Normandes!
+	Percebi que seu eclipse está compilando o JQuery no momento da edição, 
+	ou seja conseguimos de imediato ver alguns possíveis erros no código antes 
+	de testar, é algum plugin que devo instalar? ou alguma configuração do eclipse que deixei de fazer?
+	
+	Olá Deusyvan.
+	Eu não instalei nada, é o Eclipse Java EE normal sem nenhum plugin especial.
+	E só para corrigir, ele não compila o jQuery e nem o JavaScript, pois não é compilado,
+	mas às vezes só faz alguma validação do nome de uma ou outra variável, e nem é em todas. 
+***************************************************************************
+15 - Pesquisa, redimensionamento da foto, paginação e ordenação
+15.1 - Detalhe campos obrigatórios
+	Alteração de css: criação de uma classe
+	Importante lembrar que para o cadastro rapido precisei deixar a classe
+	control-label definido junto com a outra classe já definida:
+	<label class="col-sm-2  control-label" ...
+	
+***************************************************************************
+15.2. Prototipando a pesquisa da cerveja
+	Atenção na inserção da imagem e na alteração de css e inclusão do botão voltar
+***************************************************************************
+15.3. Redimensionando a imagem - salvando o thumbnail
+	Complexidade para mostrar e melhorar o codigo sobre a foto
+	WebSocket para fazer a notificação aos usuários
+	
+	Me deparei com um probleminha no ajax, não sei se é só no meu caso, 
+	veja bem: quando mudo de campo através do tab, no momento de incluir o estoque, 
+	o link de buscar a foto da cerveja some, preciso corrigir alguma coisa?
+	
+	Encontrei o problema é no css, erro só acontece no Mozilla Firefox.
+	Mudei o atributo overflow da classe bw-upload-form-file para o padrão visible:
+
+	.bw-upload-form-file {
+	    display: inline-block;
+	    vertical-align: middle;
+	    position: relative;
+	    overflow: visible;
+	    margin-bottom: 1px;
+	}
+	
+***************************************************************************
+15.4. Filtrando e resolvendo o problema do n+1: Uma consulta + N outras consultas
+	esquece o findAll e faremos uma query através de uma implementação pela interface 
+	CervejasQueries e Impl
+	Complexidade de filtro e pesquisa.
+	NOTICIA: o criteria do hibernat ficou descontinuado então melhor usar
+	a versão que aqui se encontra: 5.1.0.Final.
+***************************************************************************
+15.5. Paginação no cliente vs paginação no servidor
+	Importante reconhecer que a paginação no servidor é melhor e mais eficiente
+	apesar de não ser eficaz.
+***************************************************************************
+15.6. Prototipando a paginação
+	Entendendo a criação no bootstrap
+***************************************************************************
+15.7. Paginação na pesquisa de cervejas
+	Interessante é a paginação automática no caso de findAll uma consulta
+	sem filtros	
+***************************************************************************
+15.8. Mostrando total de páginas dinamicamente
+	Como faço a paginação usando criteria com procedure?
+	Com Criteria do Hibernate não é possível, mas com o JPA sim. 
+	Veja esses links aqui pra você aprender a chamar procedures com JPA.
+	http://www.thoughts-on-java.org/call-stored-procedures-jpa/
+	http://www.thoughts-on-java.org/call-stored-procedures-jpa-part-2/ 
+	
+	Me surgiu uma dúvida: Porque no método total da classe CervejasImpl não foi 
+	preciso anotar @Transaciontinal(readOnly=true) como no método filtrar, pois 
+	ambas pegam o EntityManager e tiram uma sessão pra pegar a criteria do hibernat, 
+	como você mesmo explicou em aula passada o spring não sabe se precisa ou não 
+	abrir uma transação, por isso a anotação com readOnly=true. Ou é por causa de 
+	estar usando o Projections?
+	
+	Porque nós usamos o método total() a partir do método filtrar() que está 
+	anotado com @Transactional. 
+	
+***************************************************************************
+15.9. Destacando a página selecionada
+	
+***************************************************************************
+15.10. Implementando botões previous e next
+
+***************************************************************************
+15.11. Mantendo o filtro nas páginas
+	Configuração do Oracle:
+	Pesquisei aqui e olha o que achei: 
+	http://stackoverflow.com/questions/1074869/find-oracle-jdbc-driver-in-maven-repository
+	
+	Olá Boa tarde.
+	Normandes, apenas para complementar o filtro veja se o que fiz tem fundamento ou se é possível melhorar o código:
+	Na realização de um filtro qualquer onde a consulta retorne apenas uma página fiz o seguinte método no PageWrapper:
+
+	public boolean isUnicaPagina(){
+ 		return getTotal() < 2;
+	}
+	
+	E no PesquisaCervejas.html, acrescentei na div da paginação:
+
+	<div class="col-sm-12  text-center" th:if="${not pagina.vazia}" th:hidden="${pagina.unicaPagina}">
+	...
+	</div>
+
+	Essa alteração vai ocultar a paginação no caso da consulta possuir apenas uma página
+	
+	Legal Deusyvan! É isso ai! 
+	
+***************************************************************************
+15.12. Prototipando a ordenacao dinâmica
+	Somente inclusão da classe do bootstrap
+***************************************************************************
+15.13. Parâmetros da ordenação
+	Implementação de Sort
+***************************************************************************
+15.14. Ordenando a pesquisa por SKU ou nome
+	Complexidade da ordenação e visualização na página virar setinhas, 
+	com e sem ordenação ascendente e descendente.
+	
+	o método "ordenada" da  classe PageWrapper poderia ser assim:
+
+	public boolean ordenada(String propriedade){
+		Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null;
+		return order != null;
+	}
+	
+	Assim eu acho que fica bacana.
+
+	<a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag">Nome								
+	        <span class="dropup" th:remove="${pagina.descendente('nome')} ? tag" th:if="${pagina.ordenada('nome')}">
+	                <span class="caret"></span>
+	        </span>	
+	        <span class="fa fa-sort" th:if="${not pagina.ordenada('nome')}" th:remove="${pagina.vazia} ? tag"></span>															
+	</a>
+	
+	Não tem um jeito de fazer a ordenação só no cliente não? Como acontece na paginação que temos a opção de paginar no cliente ou no servidor. Achei exagerado esse comportamento de fazer uma nova consulta no banco para cada clique no campo de ordenação.
+	Sim, teria como, claro.
+
+	Você precisaria encontrar alguma biblioteca JavaScript, ou criar a sua, que faça isso no browser apenas.
+	Segui sua dica e encontrei essa biblioteca Bootstrap Sortable (https://github.com/drvic10k/bootstrap-sortable), super fácil de usar e muito interessante por oferecer recursos mais avançados como por exemplo ordenar datas que talvez a abordagem utilizada no curso não atenda.
+	Fica como dica pro pessoal. Só importar os scripts, css e anota a table com sortable. :-D 
+	
+	Boa tarde, professor! Fiz a verificação da variável "direcao" um pouco diferente do que a que o senhor fez. Gosto de, às vezes, parar as aulas e tentar implementar determinadas soluções antes que o senhor as ensine - faço isso para verificar se entendi verdadeiramente a lógica da implementação. E foi por isso que cheguei a esse trecho de código:
+
+	if (order != null) {
+		direcao = order.isAscending() ? "desc" : "asc";
+	}
+
+	Fiz os testes e, aparentemente está funcionando normalmente! Está errado ou existe algum problema em fazer desta forma?
+	Me parece certo sim, acho que eu não havia percebido o método "isAscending()".
+	Valeu pela contribuição. 
+***************************************************************************
+15.15. Componente Thymeleaf para ordenação
+	Simplificando o codigo de ordenação
+	
+	Contribução: caso seja necessário passar um nome com espaçamento, como por exemplo
+	"Nome da cerveja" ao invés de simplesmente "Nome", e que o campo vai ser capturado 
+	como string, basta utilizar aspas simples:
+
+	<brewer:order page="${pagina}" field="nome" text="'Nome da cerveja'"/>
+	
+***************************************************************************
+15.16. Desafio: Pesquisa de estilos
+	Criar pagina e implementar a pesquisa, paginação, ordenação, pesquisa 
+	completa, dicas: buscas repositorios, helper, queries
+	
+***************************************************************************
+15.17. Desafio: Componente para paginação
+	Criar a pagina de paginação, criar o processador PaginationElementTagProcessor
+	configurar no BrewerDialect modificar as páginas que requerem paginação	
+***************************************************************************
+15.18. Bean útil para paginação
+	Configuramos a replicação de código que havia na implementação de paginação
+	nos arquivos EstilosImp e CervejasImp criando o PaginacaoUtil e tambem
+	configurando o mesmo em JPAConfig para encontrar o pacote dos objetos.
+***************************************************************************
+15.19. Corrigindo bug na pesquisa
+	Substituir o espaço que fica como "+" por %20 para passar como url via GET
+	
+	O erro gerado a partir da tratativa da URL na classe “UriComponentsBuilder” 
+	do spring, não encontrei, entretanto, alguma forma de contorna-lo utilizando 
+	as classes do próprio Spring. Consegui resolver esse problema utilizando a 
+	classe de builder “URIBuilder” da apache. Fiz todos os testes e está funcionando 
+	sem a necessidade de substituição do caractere “+”. Caso alguém queira utilizar 
+	segue o código abaixo:
+
+	É necessário incluir no POM a seguinte dependência.
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5.2</version>
+	</dependency>
+	
+	package com.algaworks.brewer.controller.page;
+	import java.net.URISyntaxException;
+	import java.util.List;
+	import javax.servlet.http.HttpServletRequest;
+	import org.apache.http.client.utils.URIBuilder;
+	import org.springframework.data.domain.Page;
+	import org.springframework.data.domain.Sort;
+	import org.springframework.data.domain.Sort.Order;
+	
+	public class PageWrapper<T> {
+
+		private Page<T> page;
+		private URIBuilder builderPagina;
+		private URIBuilder builderSort;
+	
+		public PageWrapper(Page<T> page, HttpServletRequest httpServletRequest) {
+			
+			this.page = page;
+			
+			try {
+				String httpUrl = getFullRequestUrl(httpServletRequest);
+				this.builderPagina = new URIBuilder(httpUrl);
+				this.builderSort = new URIBuilder(httpUrl);
+			} catch (URISyntaxException e) {
+				 throw new RuntimeException("Url inválida", e);
+			}
+		}
+	
+		public List<T> getConteudo() {
+			return page.getContent();
+		}
+		
+		public boolean isVazia() {
+			return page.getContent().isEmpty();
+		}
+		
+		public int getAtual() {
+			return page.getNumber();
+		}
+		
+		public boolean isPrimeira() {
+			return page.isFirst();
+		}
+		
+		public boolean isUltima() {
+			return page.isLast();
+		}
+		
+		public int getTotal() {
+			return page.getTotalPages();
+		}
+		
+		public String urlParaPagina(int pagina) {
+			return builderPagina.setParameter("page", String.valueOf(pagina)).toString();
+		}
+		
+		public String urlOrdenada(String propriedade) {
+			String valorSort = String.format("%s,%s", propriedade, inverterDirecao(propriedade));
+			return builderSort.setParameter("sort", valorSort).toString();
+		}
+		
+		public String inverterDirecao(String propriedade) {
+			String direcao = "asc";
+			
+			Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null;
+			if (order != null) {
+				direcao = Sort.Direction.ASC.equals(order.getDirection()) ? "desc" : "asc";
+			}
+			
+			return direcao;
+		}
+		
+		public boolean descendente(String propriedade) {
+			return inverterDirecao(propriedade).equals("asc");
+		}
+		
+		public boolean ordenada(String propriedade) {
+			Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null; 
+			
+			if (order == null) {
+				return false;
+			}
+			
+			return page.getSort().getOrderFor(propriedade) != null ? true : false;
+		}
+		
+		private String getFullRequestUrl(HttpServletRequest httpServletRequest) {
+			return httpServletRequest.getRequestURL().append(
+							httpServletRequest.getQueryString() != null ? "?" + httpServletRequest.getQueryString() : "").toString();
+		}
+		
+	}
+	
+	
+	A biblioteca UriUtils do Spring que trabalha com isso, encode/decode, 
+	Poderia ser a solução do Spring para auxiliar nisso mas sem sucesso.	
+
+***************************************************************************
+16. Cadastro com máscaras e combo dependente
+16.1. Configurando máscara de telefone com jQuery
+	
+	Como já sabemos que o jQuery MaskMoney não funcionou corretamente no celular 
+	realizei o teste com jQuery Mask Plugin, e pra minha surpresa este tb não 
+	funcionou pro celular, isto é incompatibilidade com os navegadores móveis? 
+	vc chegou a realizar este teste?
+	
+	É o evento que ambos utilizam para identificar a mudança, no celular não tem o evento
+	Como não achei um outro que funcionasse tanto no desktop quanto no celular, 
+	resolvi criar um plugin pro jQuery... tá lá na aula "28.1. Novo plugin para formatação de moeda"
+	Inclusive deixei o código aberto no meu GitHub: https://github.com/normandesjr/jquery-mask-number 
+
+***************************************************************************
+16.2. Atualização do Thymeleaf Layout Dialect
+
+	Atualmente no 2.0.4
+***************************************************************************
+16.3. Configurando máscara de CPF/CNPJ com jQuery
+	
+	Estrutura javaScript:
+	
+	var Brewer = Brewer || {};
+
+	Brewer.MascaraCpfCnpj = (function(){
+	
+		function MascaraCpfCnpj(){
+			
+		}
+		
+		MascaraCpfCnpj.prototype.iniciar = function(){
+			
+			
+		}
+		
+		return MascaraCpfCnpj;
+	
+	}());
+
+	$(function(){
+		var mascaraCpfCnpj = new Brewer.MascaraCpfCnpj();
+		mascaraCpfCnpj.iniciar();
+	});
+***************************************************************************
+16.4. Implementando radio TipoPessoa
+	
+	<div>
+		<th:block th:each="tipoPessoa : ${tiposPessoa}">
+			<div class="radio  radio-inline">
+				<input type="radio" name="tipoPessoa" th:id="|id_${tipoPessoa}|" class="js-radio-tipo-pessoa"
+					 th:attr="data-documento=${tipoPessoa.documento},  data-mascara=${tipoPessoa.mascara}">
+				<label class="control-label" th:for="|id_${tipoPessoa}|" th:text="${tipoPessoa.descricao}">Física</label>
+			</div>
+		</th:block>
+	</div>
+	
+	Mudar essa leitura:
+	
+	th:attr="data-documento=${tipoPessoa.documento},  data-mascara=${tipoPessoa.mascara}">
+	
+	Para:
+	
+	th:data-documento="${tipoPessoa.documento}" th:data-mascara="${tipoPessoa.mascara}">
+	
+	Pode deixar desta forma, mas iremos usar algo mais legível, como no curso
+	
+	Importando a dependencia:
+	
+	data:documento="${tipoPessoa.documento}" data:mascara="${tipoPessoa.mascara}">
+
+***************************************************************************
+16.5. Desafio: Configurando máscara do CEP com jQuery
+	Criado em Brewer.js
+***************************************************************************
+16.6. Aplicando migração estado e cidade
+	Cidades e estadas brasileiros:
+	Eu encontrei um api da Devmedia para realizar esta tarefa, quem quiser 
+	utilizar, eu achei bem legal:
+	http://www.devmedia.com.br/api/estadoscidades/ 
+	
+	Estado e cidades:
+	http://samus.com.br/web/files/anexos/100107140412.zip
+	Fonte: http://samus.com.br/web/site/artigo-todas_as_cidades_do_brasil_atualizado_e_com_acentos
+	
+***************************************************************************
+16.7. Selecionado cidades pelo estado com Ajax
+	Necessita re-leitura e estudo
+	Foi corrigo pela aula ainda o layout padrão
+***************************************************************************
+16.8. Aplicando migração de cliente
+	Ajudou a corrigir a tabela cliente junto com endereço usando @Embeddable
+	Para juntar duas classes em uma única tabela do banco de dados
+***************************************************************************
+16.9. Agrupando validações para CPF ou CNPJ
+	Complexidade para validar CPF/CNPJ via javascript mantendo os dados na
+	página, deve ser praticada para o entendimento.
+***************************************************************************
+16.10. Salvando CPF/CNPJ sem formatação
+	por que mesmo eu colocando @NotNull no atributo Endereco.cidade ele não 
+	valida no formulário quando não faço a seleção? 
+	Tente anotar a propriedade endereço, ainda em cliente com @Valid e ai faça o teste. 
+***************************************************************************
+16.11. Validando cliente já cadastrado
+	como se implementa as mensagens de erro nos campos de endereço?
+	Apenas precisei passar a anotação @Valid no atributo endereço na classe Cliente.
+
+***************************************************************************
+16.12. Desafio: Começando a pesquisa de clientes
+
+	Eu fiz uma alteração do brewer.js para fazer a formatação do CPF e CNPJ 
+	ao digitar na pesquisa, funcionou.Precisei aplicar o replace no filtro, 
+	se não da erro.
+	
+	Brewer.MaskCpfOuCnpjPesquisa = (function() {
+		function MaskCpfOuCnpjPesquisa() {
+			this.inputCpfOuCnpj = $('.js-cpfOuCnpj-pesquisa');
+		}
+		
+		MaskCpfOuCnpjPesquisa.prototype.enable = function () {
+			var maskBehavior = function (val) {
+				return val.replace(/\D/g, '').length >= 12 ? '00.000.000/0000-00' : '000.000.000-00999';
+			};
+			var options = {
+			  onKeyPress: function(val, e, field, options) {
+			      field.mask(maskBehavior.apply({}, arguments), options);
+			    }
+			};
+			this.inputCpfOuCnpj.mask(maskBehavior, options);
+		}
+		
+		return MaskCpfOuCnpjPesquisa;
+	}());
+	
+***************************************************************************
+16.13. Finalizando pesquisa de clientes
+	Concatenação de campos na página e sua consulta via filter = impl
+***************************************************************************
+16.14. Desafio: Finalizar cadastro de cidade
+	Cadastro de Cidade:
+	1 - Criamos a pagina html CadastroCidade, fazemos o bind do objeto recebido: cidade
+	2 - Criamos a interface do repositorio Cidades que implementa JPARepository
+	3 - Criamos o controller, nele fazemos o mapeamento ("/nova) se não tiver para retornar
+	 um ModeAndView, em seguida criamos o método salvar anotado @Postmapping, incluímos os 
+	 repositorios que são nescessários via @AutoWried.
+	4 - Criamos o service  com o metodo salvar e onde fazemos a consulta se já existente 
+	 usando Option e onde criamos o metodo que vai em repositorio neste tipo de consulta,
+	 colocamos uma condição que busca um exception do cadastro da cidade até enfim salvar a cidade.
+	5 - Criamos a Exception de acordo com a consulta para cidade já cadastrada.
+
+	Fiz aqui e funcionou beleza, como o cóigo, mas fiquei surpreso, esse método findByNomeAndEstado 
+	ele não verifica se o nome tá maiúsculo ou minusculo e nem acentuação? Muito estranho isso, deveria 
+	ter algo a mais para diferenciar as acentuações ou não e também teria mais sentido o find com IgnoreCase.
+	
+	Mas na verdade isso é o MySQL que faz e não o JPA/Hibernate ou o Spring Data JPA.
+	Deve existir um jeito na hora de criar o banco ou a tabela que você especifique 
+	que não quer esse comportamento.
+	
+	Adicionei o metodo:
+
+	public String getNomeSemAcento() {
+	    this.nome = Normalizer.normalize(this.nome, Normalizer.Form.NFD);
+	    this.nome = this.nome.replaceAll("[^\\p{ASCII}]", "");
+	    return this.nome;
+	}
+	na tabela de cidades,
+
+	E coloquei ignorecase no spring data:
+	public Optional<Cidade> findFirstByNomeIgnoreCaseAndEstado(String nome, Estado estado);
+	
+	E não tive problemas mais com acentos ou maiusculo/minuscula.
+	Tambem gravo no banco sempre sem acentos.
+	
+	Acho que esse é comportamento padrão do COLLATE utf8_general_ci, se quiser 
+	que o mysql considere acentos pode usar o COLLATE utf8_bin. Apliquei aqui 
+	somente na coluna nome da tabela cliente e funcionou, mas mudei para utf8_general_ci 
+	de novo para não ter perigo de conflitar com as próximas aulas 
+
+***************************************************************************
+16.15. Desafio: Implementando pesquisa de cidades
+	Atenção é voltado para o filter.
+	
+	Quebrar paginação:
+	na Classe: PageWrapper
+	
+	public class PageWrapper<T> {
+
+	public static final int MAX_PAG_ITEM = 7;
+	private int currentNumber;
+	private List<PageItem> items;
+	private Page<T> page;
+	private UriComponentsBuilder uriBuilder;
+
+	public PageWrapper(Page<T> page, HttpServletRequest httpServletRequest) {
+			this.page = page;
+			//this.uriBuilder = ServletUriComponentsBuilder.fromRequest(httpServletRequest);
+			
+			items = new ArrayList<PageItem>();
+			currentNumber = page.getNumber() + 1;
+	        int start, size;
+	        if (page.getTotalPages() <= MAX_PAG_ITEM){
+	            start = 1;
+	            size = page.getTotalPages();
+	        } else {
+	            if (currentNumber <= MAX_PAG_ITEM - MAX_PAG_ITEM/2){
+	                start = 1;
+	                size = MAX_PAG_ITEM;
+	            } else if (currentNumber >= page.getTotalPages() - MAX_PAG_ITEM/2){
+	                start = page.getTotalPages() - MAX_PAG_ITEM + 1;
+	                size = MAX_PAG_ITEM;
+	            } else {
+	                start = currentNumber - MAX_PAG_ITEM/2;
+	                size = MAX_PAG_ITEM;
+	            }
+	        }
+	
+	        for (int i = 0; i<size; i++){
+	            items.add(new PageItem(start+i, (start+i)==currentNumber));
+	        }
+			
+			String httpUrl = httpServletRequest.getRequestURL().append(
+					httpServletRequest.getQueryString() != null ? "?" + httpServletRequest.getQueryString() : "")
+					.toString().replaceAll("\+", "%20");
+			this.uriBuilder = UriComponentsBuilder.fromHttpUrl(httpUrl);
+		}
+		
+		public List<T> getConteudo() {
+			return page.getContent();
+		}
+		
+		public boolean isVazia() {
+			return page.getContent().isEmpty();
+		}
+		
+		public int getAtual() {
+			return page.getNumber();
+		}
+		
+		public boolean isPrimeira() {
+			return page.isFirst();
+		}
+		
+		public boolean isUltima() {
+			return page.isLast();
+		}
+		
+		public int getTotal() {
+			return page.getTotalPages();
+		}
+		
+		public String urlParaPagina(int pagina) {
+			return uriBuilder.replaceQueryParam("page", pagina).build(true).encode().toUriString();
+		}
+		
+		public String urlOrdenada(String propriedade) {
+			UriComponentsBuilder uriBuilderOrder = UriComponentsBuilder
+					.fromUriString(uriBuilder.build(true).encode().toUriString());
+			
+			String valorSort = String.format("%s,%s", propriedade, inverterDirecao(propriedade));
+			
+			return uriBuilderOrder.replaceQueryParam("sort", valorSort).build(true).encode().toUriString();
+		}
+		
+		public String inverterDirecao(String propriedade) {
+			String direcao = "asc";
+			
+			Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null;
+			if (order != null) {
+				direcao = Sort.Direction.ASC.equals(order.getDirection()) ? "desc" : "asc";
+			}
+			
+			return direcao;
+		}
+		
+		public boolean descendente(String propriedade) {
+			return inverterDirecao(propriedade).equals("asc");
+		}
+		
+		public boolean ordenada(String propriedade) {
+			Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null; 
+			
+			if (order == null) {
+				return false;
+			}
+			
+			return page.getSort().getOrderFor(propriedade) != null ? true : false;
+		}
+		
+		
+	    public List<PageItem> getItems(){
+	        return items;
+	    }
+	
+	    public int getNumber(){
+	        return currentNumber;
+	    }
+	
+	    public class PageItem {
+	        private int number;
+	        private boolean current;
+	        public PageItem(int number, boolean current){
+	            this.number = number;
+	            this.current = current;
+	        }
+	
+	        public int getNumber(){
+	            return this.number;
+	        }
+	
+	        public boolean isCurrent(){
+	            return this.current;
+	        }
+	    }
+	}
+	
+	No Html, página: Paginacao.html
+	
+	<th:block th:fragment="pagination (pagina)">
+		<div class="col-sm-12  text-center" th:if="${not pagina.vazia}">
+			<nav>
+				<ul class='pagination pagination-centered' th:with="paginaAtual=${pagina.atual}">
+			        
+			         <li th:class="${pagina.primeira}?'disabled':''">
+	              	 	<span th:if='${pagina.primeira}'>Primeira</span>
+	                	<a th:if='${not pagina.primeira}' th:href='@{${pagina.urlParaPagina(paginaAtual-paginaAtual)}}'>Primeira</a>
+	                </li>
+	                <li th:class="${pagina.primeira} ? disabled">
+	                	<a th:href="${pagina.urlParaPagina(paginaAtual - 1)}" th:remove="${pagina.primeira} ? tag" title='Ir para página anterior'><span>&laquo;</span></a>
+	                </li>
+	                <li th:each='item : ${pagina.items}' th:class="${item.current}? 'active' : ''">
+	                	<span th:if='${item.current}' th:text='${item.number}'>1</span>
+	                	<a th:if='${not item.current}' th:href='@{${pagina.urlParaPagina(item.number-1)}}'><span th:text='${item.number}'>1</span></a>
+	                </li>
+					<li th:class="${pagina.ultima} ? disabled">
+						<a th:href="${pagina.urlParaPagina(paginaAtual + 1)}" th:remove="${pagina.ultima} ? tag" title='Ir para próxima página'><span>&raquo;</span></a>
+					</li>
+					<li th:class="${pagina.ultima}? disabled">
+						<span th:if='${pagina.ultima}'>Último</span>
+	                	<a th:if='${not pagina.ultima}' th:href='@{${pagina.urlParaPagina(pagina.total-1)}}'>Última</a>
+	                </li>
+	
+	            </ul>
+			</nav>
+		</div>
+	</th:block>
+	
+***************************************************************************
+17. Otimizando a performance com cache
+17.1. Cacheando a busca de cidades por estado
+	Aprender a colocar e retirar do cache (cachiamento)	
+***************************************************************************
+17.2. Invalidando o cache no cadastro da cidade
+	Do jeito que está ele valida e tenta salvar uma cidade se não tiver 
+	selecionado um estado.
+***************************************************************************
+17.3. Cache profissional com Guava do Google
+	Exige um estudo avançado para ver a utilidade na aplicação
+***************************************************************************
+18. Cadastro com relacionamento ManyToMany
+18.1. Planejando o modelo de grupos e permissões
+***************************************************************************
+18.2. Criando a migração do usuário, grupo e permissão
+	Ensina como reparar uma migração de banco de dados na sua versão.
+***************************************************************************
+18.3. Desafio: Começando o cadastro do usuário
+	poderia comentar sobre essas anotações que vi na codificação de alguns controller?
+
+	1 - @ModelAttribute("nomeDeUmalista");
+	
+	2 - @InitBinder e  @InitBinder("nomeDeUmObjeto")
+	
+	3 - @SessionAttributes("nomeDoObjetoPrincipalDoController"). 
+	Obs.: Esta anotação eu vi somente no controller deste mesmo exemplo de 
+	sistema (Petclinic) porém no git do Thymeleaf.
+	
+	1. O @ModelAttribute é uma forma pra você colocar um objeto disponível 
+	para a view, ou seja, o retorno do método anotado com ela irá para todas 
+	as views que esse controller retornar.
+
+	2. Vou te falar no curso ainda.
+
+	3. É pra pegar um objeto da sessão do usuário. Nós vamos ver sessão do 
+	usuário ainda, ai vai dar pra você ver um pouco mais. ;) 
+	
+***************************************************************************
+18.4. Validador customizado para confirmação de senha
+	Legal para fazer outros tipos de validação
+***************************************************************************
+18.5. Input e componente para Data
+	Tem esse site que faz a conversão das mensagens pra gente.
+	
+	http://native2ascii.net/
+	Basta digitar toda a mensagem que você quer q ele te devolve já formatada.
+	
+	As configurações do datepicker, data-date-orientation, data-date-language,
+	de onde vem essas definições, do componente?
+	Vem da documentação do Bootstrap Datepicker 
+	https://bootstrap-datepicker.readthedocs.io/en/latest/
+	
+	O prefixo data- é do HTML5?
+	Sim, no HTML5 você pode incluir propriedades nas suas tags 
+	(https://developer.mozilla.org/en/docs/Web/Guide/HTML/Using_data_attributes).
+	
+	No arquivo de messages.properties, use a aba (Properties), informando name e value.
+	 aqui você pode digitar normalmente com acentos que ele vai converter o Encoding 
+	  
+***************************************************************************
+18.6. Desafio: Salvando o usuário no banco de dados
+***************************************************************************
+18.7. Salvando o status do usuário
+***************************************************************************
+18.8. Salvando o usuário com grupos
+***************************************************************************
+18.9. Salvando a senha criptografada com BCrypt
+	Thymeleaf tem um help que facilita na verificação se o objeto é novo ou não.
+
+	Usei dessa forma:
+
+	th:classappend="${usuario['new']} ? bw-required"
+	
+***************************************************************************
+19.1. Introdução à autenticação e autorização
+	Escolher páginas para uso de acordo com o perfil, esconder botoes etc
+***************************************************************************
+19.2. Configurando o Spring Security no projeto
+	Uso de CSRF muito importante para segurança será visto em outra aula
+***************************************************************************
+19.3. Tela de login customizada
+***************************************************************************
+19.4. Autenticando usuário e senha no banco de dados
+	Retiramos:
+	
+	auth.inMemoryAuthentication()
+			.withUser("admin").password("admin").roles("CADASTRO_CLIENTE");
+	
+	Ver Expressão Lambida:
+	
+	Usuario usuario = usuarioOptional.orElseThrow(() -> new UsernameNotFoundException("Usuário e/ou senha incorretos."));
+	
+	"Esqueci minha senha"
+	http://www.baeldung.com/spring-security-registration-i-forgot-my-password
+	
+	manter o e-mail informado na tela de login quando a senha for digitada errada:
+	http://stackoverflow.com/questions/31660208/keep-username-in-form-input-field-after-unsuccessful-login-attempt-java-spring 
+	
+	
+***************************************************************************
+19.5. Restringindo o acesso às páginas
+	
+	.authorizeRequests()
+				.antMatchers("cidades/nova").hasRole("CADASTRAR_CIDADE")//bloqueia
+				.anyRequest().authenticated()							//libera
+				
+	.authorizeRequests()
+				.anyRequest().authenticated()//Qualquer requisição estando autenticado
+				.antMatchers("cidades/nova").hasAnyRole("CADASTRAR_CIDADE","CADASTRAR_ESTADO")
+				
+	As regras específicas vem antes depois as mais gerais.
+	
+	.anyRequest().denyAll() = bloqueia tudo!
+	
+***************************************************************************
+19.6. Carregando as permissões do usuário
+
+private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
+		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+		//Lista de permissoes do usuário
+		List<String> permissoes = usuarios.permissoes(usuario);
+		permissoes.forEach(p -> authorities.add(new SimpleGrantedAuthority(p.toUpperCase())));
+		
+		//usuario.getGrupos().get(0).getPermissoes().get(0).getNome();
+		return authorities;
+		
+		ou:
+		usuarios.permissoes(usuario).forEach(p -> authorities.add(new SimpleGrantedAuthority(p.toUpperCase())));
+		
+		
+		@Override
+		protected void configure(HttpSecurity http) throws Exception {
+			http
+				.authorizeRequests()
+					.antMatchers("/cidades/nova").hasRole("CADASTRAR_CIDADE")
+					.antMatchers("/usuarios/**").hasRole("CADASTRAR_USUARIO")
+					.anyRequest().authenticated()
+					.and()
+				.formLogin()
+					.loginPage("/login")
+					.permitAll()
+					.and()
+				.csrf().disable();
+		}
+		
+		Passaria assim:
+		.antMatchers("/cidades/nova").hasAuthority("CADASTRAR_CIDADE")
+		.antMatchers("/usuarios/**").hasAuthority("CADASTRAR_USUARIO")
+		
+		Ou assim:
+		.antMatchers("/cidades/nova").hasRole("CADASTRAR_CIDADE")
+		.antMatchers("/usuarios/**").hasRole("CADASTRAR_USUARIO")
+					
+		E no banco de dados: 
+		
+		ROLE_CADASTRAR_CIDADE
+		ROLE_CADASTRAR_USUARIO
+		
+		OU sem alterar o banco concatenar assim no método:
+		permissoes.forEach(p -> authorities.add(new SimpleGrantedAuthority("ROLE_" + p.toUpperCase())));
+		
+	Estudar o uso de tokens:
+	Sim, é possível utilizar tokens para fazer autenticação com o Spring. 
+	Quando precisar fazer algo assim, procure sobre JWT Token.
+***************************************************************************
+19.7. Adicionando tela de acesso negado
+***************************************************************************
+19.8. Entendendo o CSRF
+***************************************************************************
+19.9. Configurando o CSRF
+
+	Um detalhe: Não sei se aconteceu com mais alguém, mais tive problemas no 
+	método adicionarCsrfToken, do javascript cerveja.upload-foto.js. Precisei 
+	fazer o bind, pois estava recebendo undefined no xhr.setRequesHeader(header,token).
+
+	UploadFoto.prototype.iniciar = function () {
+			var settings = {
+					type: 'json',
+					filelimit: 1,
+					allow: '*.(jpg|jpeg|png)',
+					action: this.containerFotoCerveja.data('url-fotos'),
+					complete: onUploadCompleto.bind(this),
+					beforeSend: adicionarCsrfToken.bind(this)
+			}
+		
+	}
+	
+	em pesquisa de cidades ele está mostrando o valor do token na url
+
+	localhost:8081/brewer/cidades?_csrf=5f0b6f0a-85d4-47d0-955d-a9835cdfd967&estado=6&nome=&page=1
+	
+	na aula 19.12 eu vou te ensinar como resolver isso!
+	
+***************************************************************************
+19.10. Problema de acentuação voltou?
+***************************************************************************
+19.11. Expirando sessão com novo login
+
+	Uma dúvida. No momento do login poderia ser passado três parâmetros. 
+	Exemplo Email, senha e código da empresa utilizando spring security?
+	Acredito que você pode criar um filtro que possa pegar esse parâmetro extra, 
+	dê uma olhada aqui: 
+	http://docs.spring.io/spring-security/site/docs/4.1.2.RELEASE/reference/htmlsingle/#form-login-filter
+
+    Esses código devem ajudar :
+
+		@Component
+		public class CustomAuthenticationProvider implements AuthenticationProvider{
+			
+			@Autowired
+			private Usuarios usuarios;
+		
+			@Override
+			public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+				String username = authentication.getName();
+				String password = authentication.getDetails().toString();
+				String codigo = ((CustomWebAuthenticationDetails) authentication.getDetails()).getCodigo();
+				
+				
+				Optional<Usuario> optionalUsuario = usuarios.porEmailEAtivo(username);
+				
+				Usuario usuario = optionalUsuario.orElseThrow(() -> new UsernameNotFoundException("Usuário e/ou senha incorretos"));
+		                UsuarioSistema userPrincipal = new UsuarioSistema(usuario, getPermissoes(usuario));
+		        
+		                return new UsernamePasswordAuthenticationToken(userPrincipal, password, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+			}
+		
+			@Override
+			public boolean supports(Class<?> authentication) {
+				return authentication.equals(UsernamePasswordAuthenticationToken.class);
+			}
+		
+			private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
+				Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+				
+				List<String> permissoes = usuarios.permissoes(usuario);
+				permissoes.forEach(p -> authorities.add(new SimpleGrantedAuthority(p.toUpperCase())));
+				
+				return authorities;
+			}
+		
+			
+		}
+		
+		
+		public class CustomWebAuthenticationDetails extends WebAuthenticationDetails {
+		
+		
+			private static final long serialVersionUID = 1L;
+		
+			private String codigo;
+			
+			public CustomWebAuthenticationDetails(HttpServletRequest request) {
+				super(request);
+				this.codigo = request.getParameter("codigo");
+			}
+		
+			public String getCodigo() {
+				return codigo;
+			}
+		
+			public void setCodigo(String codigo) {
+				codigo = codigo;
+			}
+		
+		
+		}
+		
+		@Component
+		public class CustomWebAuthenticationDetailsSource implements AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails>{
+		
+			@Override
+			public WebAuthenticationDetails buildDetails(HttpServletRequest context) {
+				return new CustomWebAuthenticationDetails(context);
+			}
+		
+		}
+		
+		
+		@EnableWebSecurity
+		@ComponentScan(basePackageClasses = AppUserDetailsService.class)
+		public class SecurityConfigAdvance extends WebSecurityConfigurerAdapter{
+		 
+		
+			@Autowired
+			private CustomWebAuthenticationDetailsSource authenticationDetailsSource;
+			
+			@Autowired
+			private CustomAuthenticationProvider authenticationProvider;
+			
+			public SecurityConfigAdvance(){
+				super();
+			}
+			
+			@Override
+			protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+				auth.authenticationProvider(authenticationProvider);
+			}
+			
+			@Override
+			public void configure(WebSecurity web) throws Exception {
+				web
+				   .ignoring()
+				   .antMatchers("/layout/**")
+				   .antMatchers("/images/**");
+			}
+		
+			
+			@Override
+			protected void configure(HttpSecurity http) throws Exception {
+				http
+				    .authorizeRequests()
+					    .antMatchers("/cidades/nova").hasRole("CADASTRAR_CIDADE")
+						.antMatchers("/usuarios/**").hasRole("CADASTRAR_USUARIO")
+				        .anyRequest().authenticated()
+				        .and()
+				    .formLogin()
+				        .loginPage("/login")
+				        .permitAll()
+				        .authenticationDetailsSource(authenticationDetailsSource)
+				        .and()
+				    .logout()
+				        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				        .and()
+				    .exceptionHandling()
+				        .accessDeniedPage("/403");
+				    ;
+			}
+		
+				
+		}	
+***************************************************************************
+19.12. Duração da sessão
+	Tempo máximo de sessão
+	id session na url
+	Ativando para cookies
+	
+	Dentro do SecurityConfig.java no metodo configure(HttpSecurity http) dentro 
+	de sessionManagement tem um metodo .wait(). Pra que seria essa opção?
+	Esse método "wait()" é o Object do Java, e não do Spring. 
+	É usado quando trabalhamos com threads.
+	 
+***************************************************************************
+19.13. Exibindo o usuário logado
+***************************************************************************
+19.14. Escondendo componentes de usuários sem permissão
+***************************************************************************
+19.15. Segurança nos métodos
+	Como ficaria se no momento da venda tiver apenas um produto em estoque e 
+	no mesmo tempo dois usuários distintos tentando vender o mesmo único produto 
+	ao mesmo tempo? Esse sistema estará preparado para vários usuários vendedores 
+	que é o caso do brewer estar acessando ao mesmo momento simultaneamente?
+
+	Não iremos controlar essa concorrência, mesmo porque nesse tipo de sistema 
+	podemos deixa o estoque negativo que a cervejaria pode encomendar mais 
+	cervejas para fazer a entrega pro cliente. 
+	Mas, você poderia usar algo como o Lock Otimista pra resolver isso, veja 
+	esse post que fiz sobre isso: 
+	http://blog.algaworks.com/entendendo-o-lock-otimista-do-jpa/
+
+	O Lock Otimista não irá deixar com que uma atualização no banco de dados 
+	seja feita por duas pessoas ao mesmo tempo, então não é necessário utilizar 
+	synchronized pra essa situação. 
+***************************************************************************
+20.  Páginas de erros customizadas
+20.1. Acessando a página 403 - Acesso negado
+	Atentar para o uso de :
+	.anyRequest().authenticated()
+	.anyRequest().denyAll()
+	
+	A maneira como vai escolher no seu sistema
+***************************************************************************
+20.2. Criando página 404 - Não encontrado
+***************************************************************************
+20.3. Desafio: criando página 500 - Erro no servidor
+	Fiz diferente no ErrosController:
+
+	@PostMapping ("/500")
+		public String paginaErroServidor(){
+			return "500";
+	}
+
+	Usei @PostMapping ao invés de @RequestMapping, ainda assim deu certo a 
+	apresentação da página de erro.
+	Esta forma está correta ou poderei ter problemas com outro tipo de erro? 
+	
+	Hum... será que se o erro for gerado através de uma requisição GET funcionará
+	também? Tenho dúvidas.
+	Também acho que não deva funcionar, então ficaria assim se apenas quiséssemos 
+	ser mais específico no erro da página para um method: POST, estou certo?
+	
+	Acho que sim. :) 	
+***************************************************************************
+21. Pesquisa com filtros avançados e multisseleção de linhas
+21.1. Implementando menu lateral	
+***************************************************************************
+21.2. Desafio: Protótipo da pesquisa de usuários
+***************************************************************************
+21.3. Trabalhando no filtro por grupo
+
+	Para o Hibernat:
+	SELECT *
+		 FROM usuario u
+			left outer join usuario_grupo ug on u.codigo = ug.codigo_usuario
+		    left outer join grupo g on ug.codigo_grupo = g.codigo
+		    where (
+				u.codigo in (select codigo_usuario from usuario_grupo where codigo_grupo = 1)
+				and
+		        u.codigo in (select codigo_usuario from usuario_grupo where codigo_grupo = 2)
+		        )
+
+	SELECT *
+		 FROM usuario u
+			inner join usuario_grupo ug on u.codigo = ug.codigo_usuario
+		    inner join grupo g on ug.codigo_grupo = g.codigo
+		    where (
+				u.codigo in (select codigo_usuario from usuario_grupo where codigo_grupo = 1)
+				and
+		        u.codigo in (select codigo_usuario from usuario_grupo where codigo_grupo = 2)
+		        )
+	
+***************************************************************************
+21.4. Multisseleção de linhas - ativando/desativando vários usuários
+	Complexidade continuando na proxima aula
+***************************************************************************
+21.5. Melhorando usabilidade da página de pesquisa de usuários
+
+	Outra maneira dos Label´s Ativo/Inativo
+
+	<td><span class="label" th:classappend="${usuario.ativo} ? label-success : label-danger"
+	              th:text="${usuario.ativo} ? Ativo : Inativo">
+	    </span>
+	</td>	
+
+	Gostaria de um feedback quanto ao uso alguns códigos:
+	Na definição das variáveis:
+	
+	var botaoClicado = $(event.currentTarget);
+	
+	this.selecaoCheckbox.filter(':checked');
+	
+	var status = this.selecaoTodosCheckbox.prop('checked');
+	
+	São formas diferentes de buscar um valor atribuído para um checkbox: 
+	por evento, por filtro e pela propriedade.
+	Tudo depende mesmo é do momento ou do status em que se encontra o respectivo 
+	valor do atributo para usarmos na nossa aplicação? 
+	
+	Ou seja cabe o desenvolvedor saber qual método usar. 
+	Percebo que para o "filter" e para "prop" quase não há uma diferença, 
+	pergunto se são apenas formas diferentes de buscar os "checked"?
+	
+	O this.selecaoCheckbox.filter(':checked'); irá te retornar uma lista de elementos, 
+	todos os checkbox que estão marcados. Já o this.selecaoTodosCheckbox.prop('checked'); 
+	irá pegar retornar se O checkbox selecaoTodosCheckbox está marcado.
+	
+	Perfeito. Mas vou melhorar minha pergunta:
+	O this.selecaoTodosCheckbox.prop('checked'); e o this.selecaoTodosCheckbox.filter(':checked');
+	retornaria o mesmo resultado? Ou é essa a diferença: filter retorna uma lista 
+	enquanto prop é de apenas um atributo? 
+		
+***************************************************************************
+21.6. Paginação da pesquisa de usuários
+***************************************************************************
+22.  Diálogo e autocomplete
+22.1. Prototipando cadastro de nova venda
+***************************************************************************
+22.2. Prototipando pesquisa rápida de clientes
+***************************************************************************
+22.3. Implementando a pesquisa rápida de clientes
+
+	Passos para simular.
+	1 - Abrir o modal
+	2 - Clicar em salvar
+	3 - Mensagem de erro será exibida, clicar no 'x' para fechar a mensagem de erro.
+	4 - Clicar novamente em salvar
+
+	Após esses passos, irá perceber que a mensagem de erro não exibirá novamente
+	O problema é que o "x" tira o elemento da tela, ai não tem como colocar de volta.
+	
+	Veja o que achei para resolver: 
+	http://stackoverflow.com/questions/13550477/twitter-bootstrap-alert-message-close-and-open-again
+	
+	O problema todo é a tag [data-dismiss="alert"] no button. Fiz a seguinte implementação:
+	
+	<div class="alert  alert-danger js-mensagem-erro" role="alert">
+	  <button type="button" class="close" ><span aria-hidden="true" id="btnCloseModal">&times;</span></button>
+	  <div><i class="fa  fa-exclamation-circle"></i> Informe pelo menos 3 letras na pesquisa</div>
+	</div>
+	
+	no javascript:
+	
+	function PesquisaRapidaCliente() {		
+	  this.btnCloseModal = $('#btnCloseModal');
+	}
+	PesquisaRapidaCliente.prototype.iniciar = function() {	
+	   this.pesquisaRapidaClientesModal.on('shown.bs.modal', onShowPesquisaModal.bind(this));	
+	   this.btnCloseModal.on('click', onCloseModal.bind(this));
+	}
+	onCloseModal = function() {
+	   this.mensagemErro.hide();
+	}
+	onShowPesquisaModal = function(event) {
+	   this.inputNome.val('');
+	   this.inputNome.focus();
+	   this.containerPesquisa.html('');
+	   this.mensagemErro.hide();
+	}
+	onErroPesquisa = function() {
+	   this.mensagemErro.show();
+	}
+	
+***************************************************************************
+22.4. Selecionando o cliente na pesquisa rápida
+***************************************************************************
+22.5. Conhecendo o componente EasyAutocomplete
+	http://easyautocomplete.com
+***************************************************************************
+22.6. Pesquisando cervejas por sku ou nome
+	Seria algo como:  "from Cerveja c inner join c.estilo e"
+	E ai, você vai precisar especificar o alias em cada atributo. Tente assim:
+	String jpql = "select new com.algaworks.brewer.dto.CervejaDTO(c.codigo, c.sku, e.nome, c.origem, c.valor, c.foto) "
+	+ "from Cerveja c inner join c.estilo e where lower(c.sku) like lower(:skuOuNome) or lower(c.nome) like lower(:skuOuNome)";
+
+	Repare na consulta acima que estou pegando o nome do Estilo agora, então no construtor ainda é uma String.
+	
+	Exemplo no repository:
+	@Query("select new com.algaworks.brewer.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
+	+ "from Cerveja where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)")
+	public List<CervejaDTO> porSkuOuNomeExemplo(@Param("skuOuNome") String skuOuNome);
+	
+	Poderia usar também com @Query, funciona beleza. Se ficar muito grande como ficou, 
+	prefiro fazer no método do que com @Query, pois fica estranho ler assim em uma anotação, 
+	claro, isso na minha opinião. 
+
+
+***************************************************************************
+22.7. Renderizando cervejas no autocomplete
+	Ver guia de documentação: guide do EasyAutocomplete: http://easyautocomplete.com/guide
+***************************************************************************
+22.8. Prototipando itens da venda
+***************************************************************************
+23. Página mestre-detalhe, escopo de sessão e testes unitários
+23.1. Como funciona o escopo de sessão?
+	Resumo de explicação de como funciona uma session_id que o servidor cria
+	e envia à uma requisição para poder responder depois com outras requisições
+	de mesmo session_id.
+	
+	Ainda não me aprofundei nesse conceito, mas gostaria de perguntar se é possível 
+	duas aplicações em servidores diferentes realizarem as requisições e se comunicarem 
+	usando tão somente o session_id? Ou seja um servidor valida o session_id 
+	para que outros servidores possam identificar o cliente e não precisar 
+	realizar login novamente? 
+	
+***************************************************************************
+23.2. Introdução aos testes unitários
+	Uma boa dica de curso, já estou na lista de espera! ;) 
+***************************************************************************
+23.3. Criando tabela de itens de venda
+	Poderia dar uma palhinha nesta explicação:
+	- Reduzir somando? Pode abstrair melhor?
+
+	".reduce(BigDecimal::add)" 
+	
+	
+***************************************************************************
+23.4. Testando a tabela de itens de venda
+
+	Complementando a aula. Não sou bom de Teste unitário, mais fiz a seguinte 
+	implementação. Vai que cresça muito os teste :)
+
+        @Test
+	public void deveCalcularValorTotalComVariosItens() throws Exception {
+		Cerveja c1 = criaCerveja("4.99");
+		Cerveja c2 = criaCerveja("5.90");
+		
+		tabelaItensVenda.adicionarItem(c1, 1);
+		tabelaItensVenda.adicionarItem(c2, 2); 
+		
+		assertEquals(getTotal(critaItemVenda(c1, 1),critaItemVenda(c2, 2)), 
+				tabelaItensVenda.getValorTotal());
+		
+	}
+
+	private Cerveja criaCerveja(String valorUnitario) {
+		Cerveja cerveja = new Cerveja();
+		cerveja.setValor(new BigDecimal(valorUnitario));
+		
+		return cerveja;
+	}
+	
+	private ItemVenda critaItemVenda(Cerveja cerveja, Integer quantidade) {
+		ItemVenda item = new ItemVenda();
+		item.setCerveja(cerveja);
+		item.setValorUnitario(cerveja.getValor());
+		item.setQuantidade(quantidade);
+		
+		return item;
+	}
+	
+	private BigDecimal getTotal(ItemVenda ... itemVendas) {
+		LinkedList<ItemVenda> itens = new LinkedList<>(Arrays.asList(itemVendas));	
+		return itens.stream()
+				.map((item) -> item.getValorTotal())
+				.reduce((item, valor) -> item.add(valor)).get();
+		
+				
+		
+	}
+	
+***************************************************************************
+23.5. Mantendo os itens da venda no servidor
+***************************************************************************
+23.6. Renderizando HTML retornado do Ajax
+***************************************************************************
+23.7. Adicionando mesmos itens na venda
+
+	Dica :)
+	- Caso alguém tenha optado por utilizar o lombok, não esquecer de sobrescrever 
+	o método EqualAndHashCode. No meu caso estou utilizando o mesmo na declaração da 
+	classe, e adicionei a seguinte anotação: @EqualsAndHashCode(of= {"codigo"}). 
+	Dessa forma consigo informar quais propriedades serão usadas na comparação.
+
+	@Entity
+	@Table(schema = "brewer", name = "cerveja")
+	@SequenceGenerator(name = "seq_cerveja", sequenceName = "brewer.seq_cerveja", initialValue = 1, allocationSize = 1 )
+	@EqualsAndHashCode(of= {"codigo"})
+	public @Data class Cerveja implements Serializable {
+	
+	Como seria o usuário adicionar um item e na tela ele colocar a quantidade:
+	No caso poderíamos usar localStorage, sessionStorage ou cookies?  
+	Claro, dá pra pensar em várias implementações, não existe uma única certa! ;) 
+	
+	
+	Para cada usuário na aplicação teremos um bean do tipo TabelaItemVenda, e dentro 
+	deste bean teremos uma lista de itens referente a sessão atual. Se tivermos 300 
+	usuários logados no sistema fazendo vendas, e estas podendo possuir várias itens, 
+	isso não geraria um carregamento muito grande de memória no servidor ? 
+	Porque 300 usuários, são 300 beans e cada um pode N itens adicionados. 
+	O Spring otimiza esse processo ?
+
+	Não existe uma otimização do Spring para isso, os objetos ficam na memória mesmo.
+	O que você precisa pensar é, esse modelo funciona pra você? Para o projeto que vai desenvolver?
+	O objetivo é eu te ensinar a usar sessão, pra você aprender o conceito e saber como usar. 
+		
+***************************************************************************
+23.8. Implementando atualização da quantidade de itens
+	Complexidade para melhorar o estudo pois cria um html e atualiza seus valores
+	de input e joga na tela e salva no servidor tudo via script.
+***************************************************************************
+23.9. Prototipando remoção de itens da venda	
+***************************************************************************
+23.10. Removendo itens da venda
+	Como eu faço nos dispositivos menores, no meu celular e tablet quando eu
+	dou dois cliques, ativa o zoom.
+	
+	É verdade, faltou esse plugin!!!
+	Você precisa adicionar um plugin do jQuery que faça isso, esse aqui deve 
+	funcionar na função doubletap - https://github.com/benmajor/jQuery-Touch-Events 
+***************************************************************************
+23.11. Simulando um escopo de view
+	Criar uma sessão por visão através de um id.
+	Boa tarde para aqueles que desejam trabalhar com ViewScoped no Spring 
+	achei um artigo legal que trata do assunto. Segue o link abaixo:
+	http://esseconhece.com.br/disponibilizando-viewscope-para-spring/ 
+	
+	Fiz alguns testes rápidos aqui e percebi que quando dou um F5 na página na 
+	qual eu já havia adicionado alguns itens na venda, como é gerado um novo uuid, 
+	perco toda a tabela de itens. É possível contornar esse problema de alguma forma? 
+	
+	Esse não é um "problema", mas a forma como fizemos a aplicação.
+	Dessa forma uma nova aba será uma nova venda, se você não quiser esse 
+	comportamento, é só tirar esse escopo de view que criamos na mão, ai vai
+	ficar na sessão do usuário e você sempre terá os dados para o usuário logado
+***************************************************************************
+23.12. Atualizando valor total
+
+	Só que eu vou fazer diferente nas próximas aulas, antes de fazer as 
+	contas é que eu vou converter todo mundo para numero, assim:
+	var valorTotal = numeral(this.valorTotalItens) + numeral(this.valorFrete) - numeral(this.valorDesconto);
+	
+***************************************************************************
+23.13 desafio-box-do-valor-total-negativo/brewer
+	Ok, Alteração na classe css e no javascript chamadados no html
+***************************************************************************
+23.14. Desafio: Criando mapeamento para tabelas de venda
+	Criar nova versão 12 do banco de dados
+	Criar classes:
+	Venda
+	Criar o enum de status da venda
+	Fazer mapeamento de itemVenda para o banco	
+***************************************************************************
+23.15. Salvando a venda no banco de dados
+	Levar venda ao banco de dados sem validação,
+	criamos o repositorio de vendas e cadastrovendasservice.
+	Em CadastroVenda.html: ligar os campos da tela: cliente, desconto, frete etc
+	acrescentavos o th:object = venda
+	No controlodor ele recebe esse objeto
+	Precisaremos do uuid no formulario para recuperar os itens da tabela de itens
+	Então colocaremos ele como atributo de Venda.java de um tipo transient	
+	e seus get e seters, trocamos o value para th: field
+	No controlador setamos esse uuid.
+	O Cliente th:field="*{cliente}", th:field="*{valorFrete}", th:field="*{valorDesconto}"
+	Na sessão que vamos criar a tabela de itens, que está no servidor, como temos o id 
+	quando chegar no controlador consiguimos recuperar as tabelas de itens e setar
+	na venda.
+	Data de Entrega: LocalDateTime: alterações na classe venda alterando para
+	dataHoraEntrega e no banco data_hora_entrega. erefazer a migração de banco
+	Tambem criaremos dois campos transient: dataEntrega e horaEntrega.
+	Vamos alterar o webConfig adicionando um padrão de hora e minuto, junto com
+	seu get e setrs.
+	e na Venda.html colocar os th:field="*{dataEntrega}" e th:field="*{horarioEntrega}"
+	Continuando em th:field="*{observacao}"
+	Informamos tudo para depois validar
+	Criamos o PostMapping para esse metodo salvar junto com redirectAtributes
+	Sem esquecer de injetar um cadastroVendasService
+	e retornando redirect para /vendas/nova e sua mensagem de vendas salva com sucesso.
+	Para realizar esta venda precisamos de um usuario, vamos pegar o usuario logado:
+	Buscamos através de usuario sistema: venda.setUsuario(usuarioSistema.getUsuario();
+	Vamos configurar os itens que estão dentro da tabela de vendas:
+	venda.setItens(tabelaItens.getItens(venda.getUuid());
+	Em CadastroVendaService:
+	Verificamos se a venda é nova:
+	criamos um método isNova();
+	e iremos setar a data e hora atual. venda.setDataCriacao(LocalDateTime.now());
+	Agora vamos calcular o valor total
+	calculamos no proprio servidor:
+	valorTotalItens.
+	Usaremos Optional para verificar se há valores nulos e devolver zero.
+	Calculando dataHoraEntrega:
+	Se existe a data de entrega e diferente de null: condição criada no service.
+	Configurando o status, na hora de criação de uma venda o default é orçamento.
+	No momento de salvar a venda precisamos fazer um cascade em itemVenda para
+	que ele entenda que também tem que salvar os itens e para cada item de venda
+	precisamos setar a venda: criamos um método chamado de adicionarItens 
+	passando os itens.
+***************************************************************************
+23.16. Criando validador customizado do Spring
+	Validação em partes de script e do servidor complica um pouco a validação:
+	Vamos validar o cliente: criando a classe do tipo component
+	Classe VendaValidator dentro do pacote validator implementando validator do spring
+	implenta-se alguns métodos:
+	supports 
+	validate
+	A validação da venda:
+	Direta: Utilitário do spring: validationUtils
+	Agora configuramos dentro do controller adicionando um método para inicializar
+	o validador: inicializarValidador() anotando com @InitBinder para adicionar
+	pra esse controlador um validador e quando encontrar alguem com @Valid Venda
+	realiza a validação, ocorrendo erro ele volta para o formulario venda, e colocamos
+	uma condição se já existir uuid.
+	Para o campo ficar vermelho vamos em cadastroVenda e adicionamos a classForErrors
+	Agora vamos validar a data 
+	em vendaValidator pegamos o target e atribuimos a venda, criando uma condição para
+	o horario com a data de entrega inserindo tambem a classError para data da entrega
+	Agora vamos validar se foi informado pelo menos uma cerveja:
+	A lista de itens deve ser colocada antes em venda para depois validar no controller 
+	atraves do método: vendasValidator()
+	Fazendo tambem a condição de itens vazio, será rejeitado e informado uma mensagem
+	com método: validarSeInformouItens();
+	É bom inicializar os itens dentro da classe venda.
+	Para manter as cervejas na lista vamos renderizar a tabela de itens, no momento de salvar
+	ele está recarregando novamente a pagina, quem faz é o tymeleaf, e no controlador 
+	vamos pegar os itens da venda e adicionar em mv.addObject("itens",venda.getItens();
+	Nesse caso iremos perder o valor total, para corrigir com th:text="${{venda.valorTotal}}"
+	para carregar no cadastroVenda, tambem vamos inicializar o atributo com zero na classe venda
+	Como o valor total está sendo calculado vamos passar essa responsabilidade 
+	para a classe venda com método calcularValorTotal(). Retirando a responsabilidade
+	do serviço.
+	Fazemos a condição de nulo para hora de entrega.
+	Também para o valorTotal menor que zero no validador, validarValorTotalNegativo()
+	Passamos agora para as validações em javascript:
+	Após renderizar algumas funções do item das tabelas não funcionam, vamos no iniciar
+	do javascript os binds: em venda.tabela-itens.js:
+	criamos uma função bindQuantidade() e bindTabelaItem()
+	Ao iniciarmos o javascript temos uma inicialização em zero, precisamos
+	pegar esses valores iniciados do servidor: 
+	mv.addObject("valorDesconto", venda.getValorDesconto());
+	mv.addObject("valorTotalItens", tabelaItens.getValorTotal(venda.getUuid()));
+	adicionamos esses valores na página:
+	em valorFrete o data:valor="${valorFrete}"
+	em valorDesconto o data:valor="${valorDesconto}"
+	no container de cervejas o data:valor="${valorTotalItens}"
+	No carregamento da tela vamos recuperar em javascript:
+	this.valorFreteInput.data('valor');
+	this.valorDescontoInput.data('valor');
+	E para o valorTotalItens temos um container na tabelaItens vai receber um 
+	prototype de uma função que retorna this.tabelaCervejaContainer.data('valor');
+	No carregamento da tela já podemos fazer as contas:
+	NO iniciar onValoresAlterados();
+	Para evitar erro de conversão de numeros e strings vamos utilizar uma biblioteca
+	numeral, já importada, forçando os numeros.
+	Para manter o nome do cliente no input colocar th:field="*{cliente.nome}
+	
+	A solução para o botão de pesquisa que não muda a cor:
+	.has-error .input-group-btn .btn.btn-default {
+		color: #a94442;
+		border-color: #a94442;
+		background-color: #f2dede;
+	}
+	
+	A solução foi baseada no link:
+	https://github.com/twbs/bootstrap/issues/11659
+	
+	e olhando o código fonte do vendors.css do layout atacama.
+	
+	
+	Uma possível solução seria reduzir o tempo da session, assim os objetos sairiam da memória mais rapidamente.
+
+	Outra ideia é submeter os valores direto e não recuperar da sessão, cada item iria 
+	junto no formulário. Poderíamos implementar usando Dynamic Fields do Thymeleaf, 
+	veja aqui na documentação: 
+	http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#dynamic-fields 
+	
+	 alterei um pouco a classe VendaValidator para verificar também se o usuário preencheu o horário de entrega.
+	 
+	  private void validarSeInformouDataHorarioEntrega(Errors errors, Venda venda) {
+		if (venda.getHorarioEntrega() == null && venda.getDataEntrega() == null) {
+			errors.rejectValue("dataEntrega", "", "Informe a data de entrega");
+			errors.rejectValue("horarioEntrega", "", "Informe o horário de entrega");
+		}
+	}
+
+        private void validarSeInformouApenasDataEntrega(Errors errors, Venda venda) {
+		if (venda.getDataEntrega() != null && venda.getHorarioEntrega() == null) {
+			errors.rejectValue("horarioEntrega", "", "Informe o horário da entrega para uma data");
+		}
+	}
+	
+	No CadastroVenda.html
+
+	<div class="form-group  col-sm-3" brewer:classforerror="horarioEntrega">
+		<label class="control-label" for="horarioEntrega">Horário de entrega</label>
+		<input type="text" class="form-control" id="horarioEntrega" th:field="*{horarioEntrega}"/>
+	</div>
+	
+	Tentei procurar no Errors se existia uma forma de passar uma lista de fields, mas não achei nenhum método 
+	que suprisse essa necessidade, caso existisse no método "validarSeInformouDataHorarioEntrega" 
+	eu faria algo assim
+	errors.rejectValue(["dataEntrega", "horarioEntrega"], "", "Informe a data e o horário de entrega"); 
+***************************************************************************
+23.17. Emitindo uma venda
+***************************************************************************
+23.18. Desafio: Implementando a pesquisa das vendas
+***************************************************************************
+23.19. Ajustando menu lateral 
+***************************************************************************
+24. Envio de e-mails e chamadas assíncronas
+24.1. Escolhendo o serviço de e-mail	
+***************************************************************************
+24.2. Configuração do servidor de e-mail com arquivos externos
+	Coloquei um arquivo .brewer-mail.properties dentro de minha HOME: /home/dfsweb
+	Abri o tomcat e em Open launch configuration:
+	Adicionei em Environment uma nova variable:
+	Name: ambiente
+	Value: homolog
+	
+	Que irá buscar do arquivo: resources/env/mail-homolog.properties dentro 
+	da aplicação o usuario do servidor de e-mail:username=Deusyvan e a senha 
+	irá buscar do arquivo na máquina: \home\dfsweb\.brewer-mail.properties
+	que é password=Cidinha2803
+	
+	funcionou bacana pois o HOME já reconhece inclusive minha pasta de usuario
+	
+	@PropertySource({ "classpath:env/mail-${ambiente:local}.properties" }) 
+	//A anotação acima vai procurar um ambiente em environment do tomcat
+	//se não existir ele busca o default que no caso é o local
+	 
+	@PropertySource(value = { "file://${HOME}/.brewer-mail.properties" }, ignoreResourceNotFound = true)
+	//Na anotação acima ele vai subscrever o ambiente informado ou não
+	// ou seja ele vai considerar este ultimo entao do arquivo mas se 
+	//o arquivo na maquina não existir ele pode dar um erro, então o parametro
+	//ignoreResourceNotFound = true faz com que não haja o erro daí vai 
+	//considerar o ambiente anterior.
+***************************************************************************
+24.3. Configuração de chamadas assíncronas
+***************************************************************************
+24.4. Enviando e-mails simples
+***************************************************************************
+24.5. Criando template para e-mail
+	Para forçar o UTF-8 colocar:
+	<head>
+  		<meta charset="UTF-8"/>
+	</head>
+***************************************************************************
+24.6. Enviando o e-mail em html com imagens
+	Até o momento conseguimos enviar instantaneamente para o gmail e receber a resposta.
+	Alguns testes foram feitos em outros provedores e está demorando para receber no e-mail.
+	12 horas depois que consegui receber o primeiro teste no hotmail por exemplo
+	
+	th:unless="${item.cerveja.temFoto()}"  é o contrário do if:
+	usando o if seria:
+	th:if="${not item.cerveja.temFoto()}"
+	
+***************************************************************************
+24.7. Formatando valores numéricos no e-mail
+	//Apenas para mostrar o que é o Numbers:
+		Numbers importaParaVerADocumentacao;
+		
+	Usamos #numbers.formatDecimal(venda.valorDesconto,1 ,2) para a formatação	
+	Usamos #objects.nullSafe( , '0,00') para os valores nulos
+	
+	O vendas.saveAndFlush(venda); já vai no banco de dados salva a venda e
+	pega as alterações feitas no banco e devolve no objeto venda com o id
+	pronto.
+	
+	Entao vamos no controle e no metodo de enviar por email:
+	no método do service salvar atualiza o objeto venda e vamos no Mailer
+	vamos no assunto do email e alteramos:
+	
+	helper.setSubject(String.format("Brewer - Venda Nr: %d", venda.getCodigo()));
+	e ainda para resposta na aplicação alteramos a mensagem do controller:
+	
+	attributes.addFlashAttribute("mensagem", String.format("Venda Nr: %d salva 
+		com sucesso e e-mail enviado!", venda.getCodigo()));	
+***************************************************************************
+25. Implementando edição e exclusão
+25.1. Implementando a exclusão de cerveja
+	No nosso layout que estamos usando já temos um componente chamado swal ou
+	Sweet Alert:
+	http://t4t5.github.io/sweetalert/
+	que facilita o design, o springMVC ajuda na parte visual com varios outros
+	componentes javascripts agregados, mas que também podem ser implementados
+	neste caso já temos ele pronto. Temos diversos parametros que podemos usar
+	como podemos ver na página dele temos um primeiro parametro com as configurações
+	e o segundo parametro com a função que ele vai realizar quando clicar em ok.
+	
+	A mensagem de erro quando houver na exclusão será implementada lá no serviço
+	de cadastro de cerveja.
+	
+	A alteração do metodo excluir do controller retirando o codigo e convertendo 
+	para cerveja iremos implementar a exclusão de uma foto também, passaremos a
+	alterar tambem o service de codigo para cerveja.	
+***************************************************************************
+25.2. Implementando a edição de cerveja
+	
+	Foto implementada erro estava no js na chamada do valor da condição da nova foto:
+		 	if(this.novaFoto.val() == true){
+				foto = 'temp/';
+			}
+		
+		if(this.novaFoto.val() == 'true'){//Faltou as aspas.
+				foto = 'temp/';
+			} 
+***************************************************************************			
+25.3. Implementando a edição de usuário
+	No relacionamento lazy @ManyToMany do usuario com grupo que usamos na tela, precisamos que a lista
+	de grupo venha inicializada, como padrão não vem, e ao acessarmos teremos o erro lazyInitializationException
+	entao para inicializarmos fazremos quando precisarmos, então ao fazer o find do usuario não chamaremos todos os
+	grupos (fetch = FetchType.EAGER), faremos um método que vai chamar usuario com os grupos dele:
+	
+	usuarios.buscarComGrupos(codigo);
+	
+	th:readonly="!${usuario.novo}" = usar para quando quisermos deixar o campo "somente leitura".
+	
+	Nota:
+	Se o e-mail for alterado pode dar problema no código, pois não existindo o novo e-mail na base a variável "usuarioExistente"
+	ficará vazia e da forma que foi implementado ao tentar recuperar a senha e ou o status será lançado excessão.
+***************************************************************************
+25.4. Implementando a edição da venda
+	Após correção na data de criação para que não seja nullo passamos a  verificar que temos alguns itens órfãos
+	acarretando erro no banco de dados que duplicam esses itens, pois é inicializada a lista de itens da classe Venda.
+	O Hibernat insere e depois atualiza e não apaga do banco de dados.
+	Para resolver a duplicação adicionamos orphanRemoval = true.
+	Dúvidas:
+	
+	No método "TabelaItensVenda.adicionarItem" adicionar os itens dessa forma:
+	itens.add(0, itemVenda);
+	Ou seja, o último vira o primeiro.
+	Uma solução simples seria não especificar o índice na hora de adicionar os objetos na lista da tabela. 
+	Algo como:
+	itens.add(itemVenda);
+	
+	A anotação:
+	@PostMapping({ "/novo", "{\+d}" }) 
+	e
+	@RequestMapping(value = { "/novo", "{\d+}" }, method = RequestMethod.POST)
+	A anotação @PostMapping é algo mais recente. Ela substitui essa configuração aqui:
+	@RequestMapping(method = RequestMethod.POST)
+	
+	No MenuLateral da aula ficou:
+	brewer:menu="@{/vendas.*}"
+	o correto seria:
+	brewer:menu="@{/vendas/.*}"
+	Sem a barra, se clicar no menu cadastro e depois no menu pesquisa, ambos estavam ficando ativos.
+	
+	Outra forma para resolver o problema da data de criação quando estamos editanto:
+	Colocar no CadastroCerveja.html isso: 
+	<input type="hidden" id="dataCriacao" th:field="*{dataCriacao}"/>
+	
+	Quando clicamos em alguma venda para irmos para pagina de edição, a data e horário de entrega não estavam 
+	sendo trazidos mesmo quando cadastrados no banco.
+	O trecho de código no controlador resolveu:
+	if(venda.getDataHoraEntrega() != null) {
+    venda.setDataEntrega(venda.getDataHoraEntrega().toLocalDate());
+    venda.setHorarioEntrega(venda.getDataHoraEntrega().toLocalTime());
+    }
+    Uma Melhor forma seria no model:
+    @PostLoad
+	private void postLoad() {
+		if (dataHoraEntrega != null) {
+			this.dataEntrega = this.dataHoraEntrega.toLocalDate();
+			this.horarioEntrega = this.dataHoraEntrega.toLocalTime();
+		}
+	}
+	usar o callback do JPA para quando venda for carregado em outro controller.
+***************************************************************************
+25.5. Implementando o cancelamento da venda
+	@EnableGlobalMethodSecurity(prePostEnabled = true)
+	Anotação que vai permitir outra anotação lá no service para cancelar:
+	@PreAuthorize()
+	Onde colocamos a regra de quem pode chamar o método:
+	@PreAuthorize("#venda.usuario == principal.usuario")
+	O # representa o elemento do parametro, no caso venda.
+	O referido usuario é identificado no cadastro venda pelo input oculto:
+	<input type="hidden" th:field="*{usuario}"/>
+	No caso de não ser o usuario logado quem criou a venda ou um administrador
+	vai ser lançado uma exceção no método do controller de vendas:
+	try {
+			cadastroVendaService.cancelar(venda);
+		} catch (AccessDeniedException e) {
+			return new ModelAndView("/403");
+		}
+	Iremos dar permissão para quem tem a permissão CANCELAR_VENDA para que
+	possa cancelar uma venda mesmo se não for administrador no Service:
+	@PreAuthorize("#venda.usuario == principal.usuario or hasRole('CANCELAR_VENDA')")
+	Iremos criar esta Role e inserir no grupo administrador:
+	INSERT INTO permissao VALUES (3, 'ROLE_CANCELAR_VENDA');
+	INSERT INTO grupo_permissao (codigo_grupo, codigo_permissao) VALUES (1, 3);
+	Melhorando o cancelamento vamos bloquear o acesso aos dados da venda em cadastro:
+	Iremos adicionar uma classe para desabilitar o botão de pesquisa avançada de cliente,
+	Criaremos um método na classe venda:
+	public boolean isSalvarPermitido() {
+		return !status.equals(StatusVenda.CANCELADA);
+	}
+	E colocamos como atributo no cadastro venda no referido botão:
+	th:disable="${not venda.salvarPermitido}"
+	Para retirarmos o not fazeremos com outro método:
+	public boolean isSalvarProibido() {
+		return !isSalvarPermitido();
+	}
+	Alterando no botão para:
+	th:disable="${venda.salvarProibido}"
+	Inclusive os outros campos do formulário, já nos botões de salvar e
+	cancelar só vai renderizar se:
+	th:if="${venda.salvarPermitido}"
+	Para a tabela de itens venda quantidade:
+	th:disabled="${venda != null ? venda.salvarProibido : false}"
+	No clique duas vezes para excluir:
+	th:if="${venda != null ? venda.salvarPermitido : false}"
+	Por fim adicionamos uma validação no service:
+	if(venda.isSalvarProibido()) {
+			throw new RuntimeException("Usuário tentando salvar uma venda proibida");
+		}
+	Para aparecer no log.
+***************************************************************************
+25.6. Desafio: Implementando edições e exclusões
+	Edição e exclusão de Cidades	
+	Edição de Estilos e cliente
+	Exclusão de usuário, cliente e estilo
+	Iniciar implementação de demais edições e exclusões.
+	
+	Qual é a diferença entre: JoinType.RIGHT_OUTER_JOIN e JoinType.LEFT_OUTER_JOIN
+	No caso de "LEFT_OUTER_JOIN" serão tragos todos os registros da tabela a esquerda e, da tabela direita, serão tragos 
+	aqueles que tiverem correspondência na esquerda.
+	O "RIGHT_OUTER_JOIN" é o contrário. Vai trazer os registros da tabela a direita e, da esquerda, 
+	somente os que tiverem correspondência com a tabela da direita.
+	
+	Qual a diferença de CascadeType.ALL e orphanRemoval=TRUE?
+	O CascadeType.ALL, que tem o CascadeType.REMOVE também, serve para remover elementos em cascata, ou seja, 
+	se Empregado tem um Endereço, caso eu remova o Empregado é pra remover também o Endereço.
+	Já o orphanRemoval é útil para removermos objetos dependentes, ou seja, não quero que exista um Endereço sem um Empregado, 
+	se tirei a referência de Empregado de Endereço, então é pra remover o Endereço. 
+	
+	Edição de cliente funcionando, se houver algum bug no cadastro sem cidade, fazer o seguinte para corrigir:
+	O select do estado fica como estava antes:
+
+	<select id="estado" class="form-control" th:field="*{endereco.estado}">
+	    <option value="">Selecione o estado</option>
+	    <option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}">São Paulo</option>
+	</select>
+	
+	Na classe endereço refatorar o método getEstado da seguinte forma:
+
+	public Estado getEstado() {
+	    if (this.cidade != null) {
+		return this.cidade.getEstado();
+	    }
+			
+	    return null;
+	}
+	
+	Após todas as edições estarem ok, passamos para implementação das exclusões.
+	
+	No cadastro de cidade:
+	Desabilitando o combobox estado para permitir editar apenas o nome da  cidade, com o seguinte código:
+
+	<input type="hidden" th:field="*{estado}" th:if="${not cidade.nova}"/>
+	
+***************************************************************************
+26. Dashboard - consultas avançadas e gráficos
+26.1. Prototipando o dashboard
+	Apenas criar a página dashboard.html
+***************************************************************************
+26.2. Box de vendas no ano, no mês e ticket médio	
+	Fazer as chamadas de expression linguange em dashboard e implementar as consultas
+	em queries e impl sendo chamadas no controller para resposta do html.
+***************************************************************************
+26.3. Conhecendo o Chartjs
+	Realiza a importação do js e na página Dashboard
+***************************************************************************
+26.4. Gráfico - Vendas por mês
+	Criando nosso js de graficos e importando ele no Dashboard com dados estaticos.
+***************************************************************************
+26.5. Consultas em arquivos externos
+	Criamos o sql nativo:
+		<?xml version="1.0" encoding="UTF-8"?>
+			<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+				version="2.1">
+				
+				<named-native-query name="Vendas.totalPorMes" result-set-mapping="totalPorMesMapping">
+					<query>
+						select date_format(data_criacao, '%Y/%m') mes
+							 , count(*) total
+			  			from venda
+			  			where data_criacao > DATE_SUB(NOW(), INTERVAL 6 MONTH)
+			  			  and status = 'EMITIDA'
+						group by date_format(data_criacao, '%Y/%m')   
+						order by date_format(data_criacao, '%Y/%m') desc
+				    </query>
+				</named-native-query>
+				
+				<sql-result-set-mapping name="totalPorMesMapping">
+					<constructor-result target-class="com.algaworks.brewer.dto.VendaMes">
+						<column name="mes" class="java.lang.String"/>
+						<column name="total" class="java.lang.Integer"/>
+					</constructor-result>
+				</sql-result-set-mapping>
+				
+			</entity-mappings>
+
+	Colocando em um arquivo externo na pasta sql.
+	Implementa a consulta do arquivo em queries e impl
+	Cria o arquivo DTO para implementar as consultas: dto.VendaMes.java
+	Configura o JPAConfig pra saber onde buscar esse arquivo externo para realizar a consulta.
+		factory.setMappingResources("sql/consultas-nativas.xml");
+	Agora renderizar nosso js para captar as informações da consulta, antes vamos mapear no controller:
+		
+		@GetMapping("/totalPorMes")
+		public @ResponseBody List<VendaMes> listarTotalVendaPorMes() {
+			return vendas.totalPorMes();
+		}
+		
+	Depois renderizamos os dados no js:
+	
+		function onDadosRecebidos(vendaMes) {
+		var meses = [];
+		var valores = [];
+		vendaMes.forEach(function(obj) {
+			meses.unshift(obj.mes); // unshift insere no inicio para colocar na ordem correta
+			valores.unshift(obj.total);
+		});
+		
+		var graficoVendasPorMes = new Chart(this.ctx, {
+		    type: 'line',
+		    data: {
+		    	labels: meses,
+		    	datasets: [{
+		    		label: 'Vendas por mês',
+		    		backgroundColor: "rgba(26,179,148,0.5)",
+	                pointBorderColor: "rgba(26,179,148,1)",
+	                pointBackgroundColor: "#fff",
+	                data: valores
+		    	}]
+		    },
+		});
+
+	Podemos fazer graficos com 2 linhas ou mais no mesmo grafico
+	Ex: criamos o grafico com vendas do mês, adicionar no mesmo grafico: vendas Perdidas
+	Sugestão é passar mais um objeto para o dataset: 
+	https://github.com/algaworks/curso-sistemas-web-com-spring-javascript-bootstrap/blob/master/26.5-consultas-em-arquivos-externos/brewer/src/main/resources/static/javascripts/dashboard.graficos.js
+
+	Assim, mais uma linha será formada.	
+	Ou https://github.com/chartjs/Chart.js/blob/6e57405a0a7885ec5099e8b8bd7b26822effa628/samples/scales/logarithmic/line.html
+	
+	Se já tem a action que vai te retornar a informação, então está simples. Basta montar o array que vai na propriedade 
+	"datasets" desse mesmo exemplo (https://github.com/chartjs/Chart.js/blob/6e57405a0a7885ec5099e8b8bd7b26822effa628/samples/scales/logarithmic/line.html).
+	Ver se o gráfico funciona com dados fictícios pelo menos.
+	Faça funcionar com informação fictícia depois substitua pelos dados vindos da sua action.
+	Exemplo: tenho uma list<Vendas>  cada venda tem seu vendedor,data(formato mês e ano),status,quantidade(qtd de vendas realizadas pelo o vendedor)
+	quero traçar um eixo para cada vendedor mostrando a quantidade vendida em cada mês
+	a query ja retorna tudo correto, o meu Rest esta correto, só não sei implementar o grafico fazer tudo automatico para os eixos X e Y para cada vendedor. 
+	
+	Faça ele funcionar primeiro sem a chamada ajax. 
+	Coloque os dados junto com o arquivo JavaScript que usar para montar o gráfico. 
+	Depois que montar o gráfico com dados fictícios vai ficar mais simples 
+	pegar os seus dados e mapeá-los no "dataset" necessário para montar o gráfico.
+	
+	Uma pequena sugestão, ordenar a lista após processar a lógica dos últimos seis meses, 
+	pois no meu cenário ocorreu que o mês 2017/01 ficou na segunda posição da lista.
+	Segue a dica: 
+	  
+	  import java.util.Collections;
+	  Collections.sort(vendasMes, (VendaMes v1, VendaMes v2) -> v2.getMes().compareTo(v1.getMes()));
+	  
+	Passar por parâmetro algumas informações, para gerar o gráfico de acordo com os parâmetros:
+	Logo depois de definir a query você pode chamar o método "setParameter", aqui:
+
+	manager.createNamedQuery("Vendas.totalPorMes").setParameter() // passe o parâmetro aqui
+	
+	Colocar as queries em um arquivo externo não aumenta o risco de um ataque de SQL injection? 
+	Isso vai depender de como sua aplicação é desenvolvida e como os parâmetros são passados para as queries.
+	No caso dessa aplicação veja que nenhum parâmetro é passado direto do browser para a query, 
+	isso já a protege desse tipo de ataque.
+	
+	Seguinte, fiz uns testes aqui...
+	Hoje dia 27/10/2016 a data de corte é 27/04/2016, incluindo uma venda com data 29/04/2016, 
+	o gráfico mostra de 2016/04 até 2016/10, ou seja 7 meses.
+	Analisando o cálculo está correto, pois é feito pelo dia, mês e ano, porém achei meio estanho mostrar os 7 meses no gráfico
+	que diz 6 meses.
+	Nesse caso qual seria a solução correta, deixar dessa forma mesmo ou apresentar os dados de 2016/05 a 2016/10?
+	
+		public List<VendaMes> totalPorMes() {
+			List<VendaMes> vendasMes =  manager.createNamedQuery("Vendas.totalPorMes").getResultList();
+			
+			LocalDate hoje = LocalDate.now();
+			for(int i=1; i <= 6; i++){
+				String mesIdeal = String.format("%d/%02d", hoje.getYear(), hoje.getMonthValue());
+				
+				boolean possuiMes = vendasMes.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
+				if (!possuiMes) {
+					vendasMes.add(i - 1, new VendaMes(mesIdeal, 0));
+				}
+				
+				hoje = hoje.minusMonths(1);
+			}
+			
+			if(vendasMes.size() > 6){
+				vendasMes.remove(vendasMes.size()-1);
+			}
+			
+			return vendasMes;
+		}
+	
+	1- Outra forma de resolver seria na consulta:
+		SELECT 
+		  TO_CHAR(DATA_CRIACAO, 'YYYY/MM') MES
+		, COUNT(*) TOTAL
+		FROM VENDA
+		WHERE  TO_CHAR(DATA_CRIACAO, 'YYYY/MM') > TO_CHAR(NOW() - INTERVAL '6 MONTH', 'YYYY/MMM')	
+		AND STATUS = 'EMITIDA'
+		GROUP BY MES
+		ORDER BY MES
+
+	2 - No Método só acrescentar a ordenação, conforme mostrado:
+		vendasMes.sort((v1,v2) -> v2.getMes().compareTo(v1.getMes()));
+	
+	3- Não muito elegante mais funcional. Alterando somente o método:)
+
+		public List<VendaMesOrigemDTO> totalPorMesOrigem() {
+				List<VendaMesOrigemDTO> vendasConsulta = vendas.totalPorMesOrigem();
+				List<VendaMesOrigemDTO> vendas = new ArrayList<VendaMesOrigemDTO>();
+		
+				// Verificar se comtem os ultimos 6 meses
+				LocalDate hoje = LocalDate.now();
+				for (int i = 1; i <= 6; i++) {
+					String mesIdeal = String.format("%d/%02d", hoje.getYear(), hoje.getMonthValue());
+		
+					Optional<VendaMesOrigemDTO> optionalVenda = vendasConsulta.stream().filter(v -> v.getMes().equals(mesIdeal))
+							.findAny();
+		
+					if (optionalVenda.isPresent()){
+						vendas.add(i - 1, optionalVenda.get());
+					} else {
+					vendas.add(i - 1, new VendaMesOrigemDTO(mesIdeal, 0, 0));
+					}
+					hoje = hoje.minusMonths(1);
+				}
+		
+				return vendas;
+			}
+***************************************************************************
+26.6. Desafio: Box total de clientes, valor total e itens no estoque
+	Primeiro editamos expression linguage do dashboard.html para as referidas combos
+	Adicionamos no controller os objetos
+	
+		mv.addObject("valorItensEstoque", cervejas.valorItensEstoque());
+		mv.addObject("totalClientes", clientes.count());
+	
+	Importamos os repositorios de cervejas e clientes para o controller
+	Vamos precisar de um dto para fazermos a consulta dos valores de itens no estoque:
+		dto.ValorItensEstoque.java
+	Com isso vamos usá-lo para criar uma query em CervejasQueries para a nossa consulta do referido dto:
+	
+		public ValorItensEstoque valorItensEstoque();
+	
+	Em contrapartida somos obrigados a implementar essa interface para a nossa consulta em impl:
+	
+		@Override
+		public ValorItensEstoque valorItensEstoque() {
+			String query = "select new com.algaworks.brewer.dto.ValorItensEstoque(sum(valor * quantidadeEstoque), sum(quantidadeEstoque)) from Cerveja";
+			return manager.createQuery(query, ValorItensEstoque.class).getSingleResult();
+		}
+	
+	Ou seja nesta única consulta teremos o valor total em dinheiro de todas as cervejas e
+	o valor total da quantidade de itens das cervejas
+	Que serão lançados no dashboard.
+	Não precisamos fazer a implementação para a contagem de clientes pois usamos os padrões já embutidos de jpa:
+	 
+	 clientes.count() no controller:
+	 
+	 mv.addObject("totalClientes", clientes.count());
+***************************************************************************
+26.7. Eventos para controle de estoque	
+	Mais sobre avisar por e-mail quando o estoque baixar, ou ainda não consultar cervejas com estoque zerado.
+	Mais sobre as configurações de email em geral.
+	Mais sobre evento de cancelamento.
+	Mais sobre aumentar o prazo de entrega se não há no estoque
+	Mais em verificar a quantidade da venda não é menor que 0.
+***************************************************************************
+26.8. Desafio: Gráfico - Vendas por origem
+	Mais sobre passando parametros
+	Mais sobre melhora o resultado:
+	- os meses apresentados consideram apenas as vendas emitidas
+	- os totais nacional/internacional estão considerando todas as vendas, independentemente de status	
+***************************************************************************
+***************************************************************************
+27. Internacionalização
+27.1. O header "Accept-Language"
+	O idioma que o browser está preferindo que o servidor mande pra ele: 
+
+		Accept-Language:"pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3"
+***************************************************************************
+27.2. Configurando a internacionalização e o Thymeleaf
+	WebConfig:
+		/*
+		@Bean
+			public LocaleResolver localeResolver(){
+				return new FixedLocaleResolver(new Locale("pt", "BR"));
+		}
+		
+		*Vamos deixar de forçar para que possamos ultilizar a configuração para Internacionalização
+		*/
+	
+	Para cada idioma teremos um: 
+		messages_pt_BR.properties
+		messages.properties	(default)
+	
+	Fazendo a intregação com Thymeleaf:
+	
+		th:text="#{venda.cadastro.titulo}"
+		
+	Ver configuração dos números que foi preciso criar um formatador:
+		BigDecimalFormatter.java
+		
+	Para que a internacionalização funcione foi preciso criar o 
+		messages_en_US.properties em substituição do default: messages.properties	
+***************************************************************************
+27.3. Internacionalizando as mensagens de validação		
+	Algumas traduções foram executadas.
+***************************************************************************
+27.4. Desafio: Internacionalizando o sistema	
+***************************************************************************
+***************************************************************************
+28. Deploy em produção na nuvem
+28.1 Novo plugin para formatação de moeda
+	Link: https://github.com/normandesjr/jquery-mask-number	
+***************************************************************************
+28.2 Novas versões do Thymeleaf e Layout
+	Versão 3.0.1 Thymeleaf
+	Versão 3.0.5 Thymeleaf
+***************************************************************************
+28.3 Deploy em um tomcat externo
+	Porque não usar o maven release para aprovação de projetos como processo:
+	https://dzone.com/articles/why-i-never-use-maven-release
+	
+	Plugin do maven que auxilia na liberação do projeto 
+	http://maven.apache.org/maven-release/maven-release-plugin/
+	
+	Nome final do projeto o padrão é:
+	<finalName>${artifactId}-${version}</finalName>
+	
+	Usaremos assim:
+	<finalName>${artifactId}</finalName>
+	
+	É possível criar datasources no Tomcat e na aplicação só o referencia através do nome JNDI.
+	Veja mais aqui: http://tomcat.apache.org/tomcat-8.5-doc/jndi-datasource-examples-howto.html 
+	
+	Como usar o Git e o GitHub, por exemplo: 
+	https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
+	
+	Baixar nosso livro gratuito de Spring Boot: 
+	http://cafe.algaworks.com/livreto-spring-mvc/
+	
+	Se estiver utilizando um servidor Linux para hospedar suas aplicações, 
+	é possível adicionar a regra de redirecionamento no iptables:
+	
+	iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+	
+	Caso precise remover a regra do iptables:
+	
+	iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to 8080
+	
+	* Lembrando que você precisa rodar os comandos como administrador. 
+	
+	Comando rápido para copiar dentro de uma pasta:
+	cp /home/deusyvan/git/brewer/brewer/target/brewer.war .
+	
+	Para ver os logs:
+	Entra na pasta logs do apache/logs
+	digite o comando:
+	tail -f catalina.out
+***************************************************************************
+28.4 Criando conta na AWS e bucket no S3	
+	Realizando a configuração do pom e classes de configuração, bem como a criação
+	de conta no amazon S3
+	
+	Pra quem não quiser criar a conta na Amazon pode usar o S3 Ninja pra emular localmente.
+	https://github.com/algaworks/primeira-oficina-de-spring-framework-projeto-wine
+***************************************************************************
+28.5. Buscando imagens a partir da URL	
+	Deixaremos de usar o fotoStorage com seus metodos de mover ao salvar.
+	Erro persistia por conta dos parametros que não haviam sido colocados no arquivo:
+	.brewer-s3.properties na pasta home.
+***************************************************************************
+28.6. Upload das fotos para o S3 da Amazon	
+	Aprender a usar a api:
+	https://aws.amazon.com/pt/sdk-for-java/
+	
+	Lembrar de ativar o profiles no tomcat em Environment
+***************************************************************************
+28.7. Escolhendo um fornecedor na nuvem
+	Criar uma conta em:
+	www.heroku.com	
+	
+	Instalar na maquina:
+	Heroku CLI - Heroku toolbelt
+	https://devcenter.heroku.com/articles/heroku-cli
+	
+	instalar com o comando:
+	wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+	
+	Começando
+	Você será solicitado a inserir suas credenciais Heroku na primeira vez que você executar um comando; 
+	Após a primeira vez, seu endereço de e-mail e um token da API serão salvos em
+	 ~ / .netrc 
+	 para uso futuro. Para obter mais informações, consulte Heroku CLI Authentication
+	 Geralmente, é uma boa idéia fazer login e adicionar sua chave pública imediatamente após instalar a CLI Heroku 
+	 para que você possa usar git para empurrar ou clonar os repositórios de aplicativos Heroku:
+	 
+	 heroku login
+		Enter your Heroku credentials.
+		Email: adam@example.com
+		Password (typing will be hidden):
+		Authentication successful.
+		Logged in as deusyvan@gmail.com
+		
+		Agora você está pronto para criar seu primeiro aplicativo Heroku:
+***************************************************************************
+28.8. Fazendo deploy na nuvem
+	Entrar na pasta onde está a aplicação e dar um comando para criar a aplicação:
+	heroku create dfswebbrewer
+	
+	Para fazer o deploy no heroku vamos precisar do git
+	para iniciar o git :
+	git init na pasta.
+	depois para colocar nossa aplicação:
+	git remote add heroku https://git.heroku.com/dfswebbrewer.git
+	
+	Para ver se nossa aplicação já está com git
+	git remote -v
+	
+	Vamos criar o banco de dados no heroku:
+	Não foi possível...
+	
+	Procure aprender sobre DevOps, especialmente na área de Deploy Contínuo ou Continuous Deployment. 
+	Para fazer em uma rede onde cada cliente tem a aplicação local.
+	
+	Rever para ver comandos do git.
+***************************************************************************
+29. Relatórios com JasperReports
+29.1. Introdução ao JasperReports
+	Baixar o jaspersoft studio
+	https://community.jaspersoft.com/project/jaspersoft-studio/releases
+***************************************************************************
+29.2. Criando relatório de vendas emitidas	
+	
+	/*GERAR NUMERO EM MILISEGUNDO DE DATA NO JAVA*/
+	LocalDate date = LocalDate.of(2016, Month.FEBRUARY, 1) // Vai gerar o Date
+	sysout(date.toEpochDay() * 24 * 60 * 60) // para tranformar em milisegundos 
+	
+	
+	INSERINDO DADOS ALEATÓRIOS:
+	
+	INSERT INTO venda (data_criacao, valor_total, status, codigo_cliente, codigo_usuario)
+	VALUES(
+    -- 1473292800 = 8/SET     E   1454284800 = 01/FEV  EM MILISEGUNDOS
+			FROM_UNIXTIME(ROUND((RAND() * (1473292800 - 1454284800) + 1454284800)))
+		,   ROUND(RAND() * 10000, 2)
+        ,   'EMITIDA'
+        ,   ROUND(RAND() * 7) + 1
+        ,   ROUND(RAND() * 2) + 1
+			)
+	
+	CONSULTA PARA UM RELATÓRIO:
+	
+	use brewer;
+	SELECT v.data_criacao AS data_criacao
+		,  v.valor_total AS valor_total
+	    ,  c.nome AS nome_cliente
+	    ,  u.nome AS nome_vendedor
+	    ,  v.codigo AS codigo
+		FROM 
+			venda v INNER JOIN cliente c ON v.codigo_cliente = c.codigo
+	        INNER JOIN usuario u ON v.codigo_usuario = u.codigo
+		WHERE v.status = 'EMITIDA'
+			AND v.data_criacao BETWEEN '2016-01-01 00:00:00' AND '2017-11-05 13:40:00'
+		ORDER BY v.data_criacao ASC
+***************************************************************************
+29.3. Melhorando a formatação do relatório
+	Jaspersoft studio
+***************************************************************************
+29.4. Emitindo relatório com Spring MVC	
+	Para fazer impressão direta (sem nem mesmo abrir um documento PDF), 
+	você precisaria que o servidor da sua aplicação pudesse se comunicar 
+	com a impressora via rede local (ou até via internet caso a impressora suporte isso).
+	Dê uma olhada nisso aqui: 
+	https://www.google.com/intl/pt-BR/cloudprint/learn/apps/. Talvez ajude.
+	
+	Para nomear o nome do arquivo:
+	Na sua action que retorna o documento, basta você receber um parâmetro 
+	do tipo HttpServletResponse e, a partir dele, setar o header "Content-disposition" 
+	com um valor como "attachment; filename=NOME_DO_ARQUIVO.pdf".
+	
+	Quando não há dados:
+	No JASPERSOFT tem uma opção que você configura na criação do relatorio: 
+	"When no data type" para "All Sections no Datail", isso faz com que nenhum 
+	DATAIL do relatório seja preenchido quando não tem dados, porém você pode 
+	criar um page header que este será executado, e nele eu inseri um textfield 
+	com um if, que quando o resultado da pagina for zero, imprimir a mensagem. 
+	Com isso meu arquivo é gerado, porém com a mensagem de que não existe dados 
+	para impressão no periodo informado.
+
+   	IF ($V{REPORT_COUNT}==0,"NÃO EXISTE DADOS DE VENDAS NO PERIODO INFORMADO",null)
+	
+	Para imprimir direto:
+	http://stackoverflow.com/questions/7074070/how-to-send-a-pdf-file-directly-to-the-printer-using-javascript
+	http://stackoverflow.com/questions/35738514/how-to-send-a-file-directly-to-the-printer-without-using-window-print-in-php-j 
+	
+	Baixar ou não o pdf:
+	http://www.computerhope.com/issues/ch001114.htm
+	
+	Outros formatos:
+	http://community.jaspersoft.com/project/jasperreports-library/resources#Documentation
+	
+	Quanto a abrir na outra aba usar o target="_blank"
+	adicionar target="_blank" na tag <form> de RelatorioVendasEmitidas.html. 
+***************************************************************************
+30. Spring Boot
+30.1. Introdução
+	Facilitador para a criação, execução e desenvolvimento do projeto.
+	DevTools compila como o JRabel
+	Vem com um TomCat embutido, suficiente para produção, sem precisar de um
+	deploy de um war. Simplesmente inicia o tomcat e inicia o projeto.
+	
+	starter fica mais fácil adicionar as dependencias no pom, versão etc.
+	Ele já pega as dependencias que o projeto vai precisar e já combina
+	as dependencias compativas entre si
+	
+	Configuração Automática (ViewResolver do Thymeleaf) cria a aplicação e já roda rapidamente.
+	Não tem geração de código. Simplesmente configura a aplicação baseado no que
+	consegue encontrar.
+	
+	start.spring.io  você gera um projeto e importa para o eclipse.
+***************************************************************************
+30.2. Criando sua primeira aplicação com o Spring Boot
+		
+	Procure no google: spring boot github
+	buscar a documentação do spring boot no github para ver as dependências:
+	https://github.com/spring-projects/spring-boot
+	
+	Na tag da versão usada, buscamos nossa dependencia para colocar no projeto
+	Neste caso o <thymeleaf.version>2.1.5.RELEASE</thymeleaf.version>
+	e iremos usar a versão 3.0 como saber é no search maven:
+	https://search.maven.org/
+	
+	<properties>
+	...
+	
+	<!-- Alterando a versão do thymeleaf -->
+		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+		<thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
+	</properties>
+
+	Geramos uma aplicação standalone. Não depende de nada externo.
+***************************************************************************
+30.3. Spring Boot na nuvem
+	Explicação usando o heroku, apenas para conhecimento do git.
+	
+	Artigo com comandos do git:
+	http://blog.algaworks.com/spring-boot/
+	
+	http://blog.algaworks.com/hospedagem-jsf-heroku/
+	
+	Chaves publicas:
+	https://help.github.com/articles/connecting-to-github-with-ssh/
+	
+	http://adrianorosa.com/blog/seguranca/como-criar-ssh-key-pair-windows.html
+	
+	Depois você entra na url para colocar a chave publica gerada dentro do GitHub:
+	https://github.com/settings/keys
+	
+	https://help.github.com/articles/error-permission-denied-publickey/
+	
+	Para instalar em outros servidores:
+	http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-maven-packaging
+***************************************************************************
+30.4. Vale a pena fazer a migração?	
+	Instruções para o spring boot:
+	https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-maven-packaging
+	Basicamente, você vai alterar o packaging no pom.xml para WAR e dizer que a dependência do Tomcat é "provided".
+	
+	No projeto spring boot, pode tirar o web.xml e colocar os arquivos 404.html/500.html/outros_code_errors.html 
+	numa basta chamada "error" dentro do static/templates do projeto, e o spring qndo receber o código 404 ele 
+	irá verificar se dentro do templates tem uma pasta chamada error com o arquivo 404.html dentro, e irá exibi-la.
+***************************************************************************
+30.5. Migração da app Brewer	
+	Testar a migração para o spring boot.
+	Configuração do fly way:
+	https://github.com/spring-projects/spring-boot/tree/v1.5.4.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/flyway
+	
+	Multi Tenancy:
+	https://github.com/algaworks/webinario-multi-tenant
+	
+	Implementar SMS dá uma olhada no https://www.twilio.com/
+***************************************************************************
+30.6. Próximos passos e conclusão
+	Ver @Version:
+	http://blog.algaworks.com/entendendo-o-lock-otimista-do-jpa
+	
+	Livros, cursos, documentação, webnarios, congressos, etc
+***************************************************************************
+*********************************  FIM  ************************************
+
+	
+	
+	
+	
+	
+	
+99815-3095
+*8486 retirar duvidas
+
+goread
+nba
+kantOO Ingles
+
+
+
+No envio de e-mail a imagem está indo tambem como anexo.
+No cadastro de venda faltando configurar a data de entrega e horario com JQuery.
+Estoque não está funcionando quando emite a venda.
+Quando envia a venda por e-mail a venda passa a ser orçamento.
+Quando cancelada a venda também não altera o estoque.
+
+
+
+	

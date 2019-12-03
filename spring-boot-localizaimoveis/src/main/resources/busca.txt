@@ -1,0 +1,1 @@
+https://localizaimovel.herokuapp.com/imoveis/buscaporpreco?vinicial=120000&vfinal=320000

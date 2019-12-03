@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>BLOG IFRN</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
+        <style>
+            body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+        </style>
+    </h:head>
+    <h:body class="w3-light-grey">
+        <div class="w3-content" style="max-width:1400px; ">
+
+            <div class="w3-col l8 s12" style="position: absolute; left: 50%; transform: translate(-50%); line-height: 24px;">
+                <div class="w3-card-4 w3-margin w3-white">
+                    <div class="w3-container">
+                        <ui:repeat value="#{postController.getPostByTitle}" var="p">
+                            <h:link outcome="post?id=#{p.title}">
+                                <h3><b>#{p.title}</b></h3><br/>
+                            </h:link>
+                        </ui:repeat>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </h:body>
+</html>

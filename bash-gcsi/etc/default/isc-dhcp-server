@@ -1,0 +1,3 @@
+# Em quais interfaces o servidor DHCP deve servir as requisicoes?
+#	Separe multiplas interfaces com espacos, exemplo "eth0 eth1".
+INTERFACES="eth1"

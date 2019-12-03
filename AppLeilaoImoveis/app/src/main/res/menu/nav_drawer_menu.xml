@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <!-- Lista com todos os imoveis -->
+        <item
+            android:id="@+id/nav_item_imoveis_todos"
+            android:checked="true"
+            android:icon="@drawable/ic_drawer_imovel"
+            android:title="@string/imoveis" />
+        <!-- Lista com os imoveis casa -->
+        <item
+            android:id="@+id/nav_item_imoveis_casas"
+            android:checked="true"
+            android:icon="@drawable/ic_drawer_imovel"
+            android:title="@string/casa" />
+        <!-- Lista com os imoveis apartamento -->
+        <item
+            android:id="@+id/nav_item_imoveis_apartamentos"
+            android:checked="true"
+            android:icon="@drawable/ic_drawer_imovel"
+            android:title="@string/apartamento" />
+        <!-- Lista com os imoveis de terreno -->
+        <item
+            android:id="@+id/nav_item_imoveis_terrenos"
+            android:checked="true"
+            android:icon="@drawable/ic_drawer_imovel"
+            android:title="@string/terreno" />
+        <!-- WebView com informações sobre a caixa economica -->
+        <item
+            android:id="@+id/nav_item_site_caixa"
+            android:icon="@drawable/ic_drawer_site_caixa"
+            android:title="@string/site_da_caixa" />
+        <!-- Tela de configurações -->
+        <item
+            android:id="@+id/nav_item_settings"
+            android:icon="@drawable/ic_drawer_settings"
+            android:title="@string/configuracoes" />
+    </group>
+</menu>
